@@ -103,8 +103,20 @@ body {
 
 .card { background: white; padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
 
-/* Estilo para la frase en turco */
-#word { font-size: 2.2rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+/* Estilo para la frase en turco (Pregunta) */
+#word { 
+    font-size: 1.8rem; 
+    color: var(--primary); 
+    font-weight: 800; 
+    margin-bottom: 5px; 
+}
+
+/* Ajuste automático para que en el móvil sea aún más pequeño */
+@media (max-width: 600px) {
+    #word {
+        font-size: 1.5rem !important;
+    }
+}
 
 /* Estilo para la traducción (se crea por JS) */
 #translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
