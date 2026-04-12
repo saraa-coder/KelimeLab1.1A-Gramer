@@ -1,5 +1,5 @@
 /**
- * TURKCE MASTER - VOCABULARIO EXPANDIDO
+ * TURKCE MASTER - MOTOR CON CONCORDANCIA PLURAL EN ESPAÑOL
  */
 
 const TR = {
@@ -25,7 +25,6 @@ const TR = {
     applyKetcap: (w) => {
         if (w.toLowerCase() === "su") return "su";
         const last = w.slice(-1).toLowerCase();
-        // Evitar mutación en palabras muy cortas (opcional, pero recomendado)
         if (w.length <= 2) return w; 
         return TR.mutations[last] ? w.slice(0, -1) + TR.mutations[last] : w;
     },
@@ -49,45 +48,28 @@ const game = {
         objects: [
             { w: "ekmek", m: "el pan" }, { w: "elma", m: "la manzana" },
             { w: "kitap", m: "el libro" }, { w: "kapı", m: "la puerta" },
-            { w: "su", m: "el agua" }, { w: "gazete", m: "el periódico" },
-            { w: "bardak", m: "el vaso" }, { w: "anahtar", m: "la llave" },
-            { w: "çanta", m: "el bolso" }, { w: "çiçek", m: "la flor" },
-            { w: "bilgisayar", m: "el ordenador" }, { w: "defter", m: "el cuaderno" }
+            { w: "su", m: "el agua" }, { w: "gazete", m: "el periódico" }
         ],
         places: [
             { w: "ev", m: "la casa" }, { w: "okul", m: "la escuela" },
-            { w: "park", m: "el parque" }, { w: "ofis", m: "la oficina" },
-            { w: "iş", m: "el trabajo" }, { w: "sokak", m: "la calle" },
-            { w: "market", m: "el mercado" }, { w: "hastane", m: "el hospital" },
-            { w: "eczane", m: "la farmacia" }, { w: "fırın", m: "la panadería" },
-            { w: "restoran", m: "el restaurante" }, { w: "bahçe", m: "el jardín" }
+            { w: "park", m: "el parque" }, { w: "iş", m: "el trabajo" },
+            { w: "sokak", m: "la calle" }, { w: "market", m: "el mercado" }
         ],
         people: [
-            { w: "doktor", m: "médico/a", vEsp: "ser" },
-            { w: "öğretmen", m: "profesor/a", vEsp: "ser" },
-            { w: "avukat", m: "abogado/a", vEsp: "ser" },
-            { w: "öğrenci", m: "estudiante", vEsp: "ser" },
-            { w: "mimar", m: "arquitecto/a", vEsp: "ser" },
-            { w: "mutlu", m: "feliz", vEsp: "estar" },
-            { w: "yorgun", m: "cansado/a", vEsp: "estar" },
-            { w: "hasta", m: "enfermo/a", vEsp: "estar" },
-            { w: "aç", m: "hambriento/a", vEsp: "estar" },
-            { w: "evli", m: "casado/a", vEsp: "ser" },
-            { w: "bekâr", m: "soltero/a", vEsp: "ser" },
-            { w: "çalışkan", m: "trabajador/a", vEsp: "ser" }
+            { w: "doktor", m: "médico/a", pl: "médicos/as", vEsp: "ser" },
+            { w: "öğretmen", m: "profesor/a", pl: "profesores/as", vEsp: "ser" },
+            { w: "avukat", m: "abogado/a", pl: "abogados/as", vEsp: "ser" },
+            { w: "mutlu", m: "feliz", pl: "felices", vEsp: "estar" },
+            { w: "yorgun", m: "cansado/a", pl: "cansados/as", vEsp: "estar" },
+            { w: "hasta", m: "enfermo/a", pl: "enfermos/as", vEsp: "estar" }
         ]
     },
 
     verbs: [
         { w: "ye", m: "comiendo", case: "acusativo", cat: "objects" },
         { w: "oku", m: "leyendo", case: "acusativo", cat: "objects" },
-        { w: "aç", m: "abriendo", case: "acusativo", cat: "objects" },
-        { w: "al", m: "comprando", case: "acusativo", cat: "objects" },
-        { w: "kapat", m: "cerrando", case: "acusativo", cat: "objects" },
         { w: "git", m: "yendo", case: "dativo", cat: "places" },
-        { w: "gel", m: "viniendo", case: "ablativo", cat: "places" },
-        { w: "bak", m: "mirando", case: "dativo", cat: "places" },
-        { w: "otur", m: "viviendo", case: "locativo", cat: "places" }
+        { w: "gel", m: "viniendo", case: "ablativo", cat: "places" }
     ],
 
     generate() {
@@ -100,8 +82,7 @@ const game = {
             return { noun: n, person: p, mode: "nominal", type: type };
         } else {
             const v = this.verbs[Math.floor(Math.random() * this.verbs.length)];
-            const category = this.nouns[v.cat];
-            const n = category[Math.floor(Math.random() * category.length)];
+            const n = this.nouns[v.cat][Math.floor(Math.random() * this.nouns[v.cat].length)];
             return { noun: n, verb: v, person: p, mode: "verb", case: v.case };
         }
     },
@@ -204,9 +185,12 @@ const game = {
                 msg = `${prons[c.person]} ${vProns[c.person]} ${c.verb.m} ${c.noun.m}.`;
             } else {
                 const v = conj[c.noun.vEsp][c.person];
-                if (c.type === "olumlu") msg = `${prons[c.person]} ${v} ${c.noun.m}.`;
-                else if (c.type === "olumsuz") msg = `${prons[c.person]} no ${v} ${c.noun.m}.`;
-                else msg = `¿${prons[c.person]} ${v} ${c.noun.m}?`;
+                // Concordancia plural: Si es biz/siz, usa n.pl, si no n.m
+                const adjective = (c.person === "biz" || c.person === "siz") ? c.noun.pl : c.noun.m;
+                
+                if (c.type === "olumlu") msg = `${prons[c.person]} ${v} ${adjective}.`;
+                else if (c.type === "olumsuz") msg = `${prons[c.person]} no ${v} ${adjective}.`;
+                else msg = `¿${prons[c.person]} ${v} ${adjective}?`;
             }
             document.getElementById("hint-display").innerText = msg;
         } else {
