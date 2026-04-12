@@ -506,8 +506,6 @@ let activeQueue = [];
 let current = null;
 let locked = false;
 
-const BLOCK_SIZE = 0; // Espacio para tu nueva lógica
-
 let score = parseInt(localStorage.getItem('turco_score')) || 0;
 let progress = JSON.parse(localStorage.getItem('turco_progress')) || {};
 
@@ -520,26 +518,32 @@ function resetAndStart() {
 
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-container').style.display = 'flex';
+    document.getElementById('game-container').style.display = 'block'; // Cambiado a block para evitar errores de layout
     initBlocks();
     updateUI();
     loadQuestion();
 }
 
 function initBlocks() {
-    let available = allWords.filter(item => (progress[item.word] || 0));
+    // CORRECCIÓN: Si no hay progreso, usamos todas las palabras.
+    let available = allWords.filter(item => progress[item.word] !== undefined);
+    
+    if (available.length === 0) {
+        available = [...allWords];
+    }
+    
     available.sort(() => Math.random() - 0.5);
     activeQueue = available;
     pool = [];
 }
 
 function updateUI() {
-    document.getElementById("score").textContent = score;
+    document.getElementById("score").textContent = score + " completadas";
     document.getElementById("percent").textContent = "";
 }
 
 function loadQuestion() {
-    if (activeQueue.length === 0 && pool.length === 0) {
+    if (activeQueue.length === 0) {
         document.getElementById("word").textContent = "FIN";
         document.getElementById("options").innerHTML = "";
         return;
@@ -553,18 +557,18 @@ function loadQuestion() {
     
     wordElement.textContent = current.word;
     wordElement.classList.remove("word-mastered"); 
-    
-    optionsContainer.classList.remove("has-mastered");
-    
-    renderDots(current.word);
+    optionsContainer.innerHTML = "";
 
+    // Generar opciones (la correcta + 3 aleatorias)
     let opts = new Set([current.correct]);
     while(opts.size < 4) {
-        opts.add(allWords[Math.floor(Math.random() * allWords.length)].correct);
+        let randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+        opts.add(randomWord.correct);
     }
     
-    optionsContainer.innerHTML = "";
-    [...opts].sort(() => Math.random() - 0.5).forEach(opt => {
+    let shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+    
+    shuffledOpts.forEach(opt => {
         let btn = document.createElement("button");
         btn.className = "option";
         btn.textContent = opt;
@@ -576,18 +580,17 @@ function loadQuestion() {
 function handleAnswer(opt, btn) {
     if (locked) return;
     locked = true;
+    
     const correct = current.correct;
     const word = current.word;
-    const optionsContainer = document.getElementById("options");
-    let masteredThisTurn = false;
 
     document.querySelectorAll(".option").forEach(b => {
         if (b.textContent === correct) b.classList.add("correct");
     });
 
     if (opt === correct) {
-        progress[word] = (progress[word] || 0);
-        // Lógica de progreso eliminada
+        score++;
+        progress[word] = (progress[word] || 0) + 1;
     } else {
         btn.classList.add("wrong");
     }
@@ -596,30 +599,17 @@ function handleAnswer(opt, btn) {
     localStorage.setItem('turco_progress', JSON.stringify(progress));
     
     updateUI();
-    renderDots(word, masteredThisTurn);
-
-    const waitTime = 800;
 
     setTimeout(() => {
         loadQuestion();
-    }, waitTime);
+    }, 800);
 }
 
-function renderDots(word, mastered = false) {
-    let container = document.getElementById("dots");
-    if(!container) return;
-    
-    container.innerHTML = "";
-    // Lógica de puntos visuales eliminada
-}
-
+// Para que el botón "Devam Et" funcione al recargar
 window.onload = () => {
     const resumeBtn = document.getElementById('resume-button');
-    const savedScore = parseInt(localStorage.getItem('turco_score')) || 0;
     const savedProgress = JSON.parse(localStorage.getItem('turco_progress')) || {};
-    const hasAnyProgress = Object.keys(savedProgress).length > 0;
-
-    if (hasAnyProgress && resumeBtn) {
+    if (Object.keys(savedProgress).length > 0 && resumeBtn) {
         resumeBtn.style.display = 'block'; 
     }
 }
