@@ -113,23 +113,41 @@ function loadQuestion() {
 }
 
 function checkAnswer(selected, correct) {
-  const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll("#options button");
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+
+    const value = btn.innerText;
+
+    // correcta siempre verde
+    if (value === correct) {
+      btn.style.background = "#22c55e";
+    }
+
+    // si es la seleccionada y es incorrecta → rojo
+    if (value === selected && selected !== correct) {
+      btn.style.background = "#ef4444";
+    }
+  });
 
   if (selected === correct) {
     score++;
-    feedback.innerText = "✔ Doğru!";
-  } else {
-    feedback.innerText = `✖ Yanlış. Doğru: ${correct}`;
   }
 
   currentIndex++;
-
   saveProgress();
 
   setTimeout(() => {
     if (currentIndex < quiz.length) {
       loadQuestion();
     } else {
+      document.getElementById("feedback").innerText =
+        `🎉 Bitti! Score: ${score}/${quiz.length}`;
+      localStorage.removeItem("kelimer_lab");
+    }
+  }, 900);
+}
       feedback.innerText = `🎉 Bitti! Score: ${score}/${quiz.length}`;
       localStorage.removeItem("kelimer_lab");
     }
