@@ -320,7 +320,6 @@ const allWords = [
     {word:"Onlar hazır___",correct:"-",translation:"Están listos"},
     {word:"Onlar yorgun___",correct:"-",translation:"Están cansados"},
     {word:"Onlar öğretmen___",correct:"-",translation:"Son profesores"},
-    {word:"Onlar aquí___",correct:"-",translation:"Están aquí"},
     {word:"Onlar meşgul___",correct:"-",translation:"Están ocupados"},
     {word:"Onlar öğrenci değil___",correct:"-",translation:"No son estudiantes"},
     {word:"Ben doktor değil ___",correct:"im",translation:"No soy médico"},
