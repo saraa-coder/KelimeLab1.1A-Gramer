@@ -18,7 +18,7 @@ body {
 /* --- ESTRUCTURA DE PORTADA --- */
 .header-wrapper {
     display: flex;
-    flex-direction: column; /* Por defecto en columna para facilitar el diseño */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -27,15 +27,14 @@ body {
 
 .main-title {
     display: flex;
-    flex-direction: column; /* Apila Kelime Lab y Gramer */
+    flex-direction: column;
     align-items: center;
     margin: 0 !important;
-    line-height: 1;
+    line-height: 1.1;
     font-weight: 800;
     text-align: center;
 }
 
-/* Primera línea: Kelime Lab */
 .main-title span:first-child {
     font-size: 4rem;
     background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
@@ -44,7 +43,6 @@ body {
     background-clip: text !important;
 }
 
-/* Segunda línea: Gramer */
 .main-title span:last-child {
     font-size: 3rem;
     opacity: 0.9;
@@ -70,15 +68,49 @@ body {
     margin-top: 10px;
 }
 
+/* --- ESTILOS COMUNES DEL JUEGO --- */
+.screen-content { text-align: center; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+
+.primary-btn { display: block; width: 240px; font-size: 1.2rem; font-weight: bold; padding: 15px 0; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
+.primary-btn:active { transform: scale(0.95); }
+
+#game-container { width: 100%; max-width: 500px; display: none; flex-direction: column; padding: 20px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.stats { background: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+.card { background: white; padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+
+#word { 
+    font-size: 1.8rem; 
+    color: var(--primary); 
+    font-weight: 800; 
+    margin-bottom: 5px; 
+}
+
+#translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
+
+/* Opciones más juntas (gap reducido) */
+.options-grid { display: grid; gap: 8px; }
+
+.option { 
+    background: white; 
+    padding: 12px 15px; /* Altura vertical reducida */
+    border-radius: 15px; 
+    font-size: 1.2rem; /* Letra un pelín más pequeña en PC para equilibrio */
+    border: 2px solid transparent; 
+    cursor: pointer; 
+    font-weight: 700; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    text-transform: lowercase; 
+}
+
 /* --- AJUSTES PARA MÓVIL --- */
 @media (max-width: 600px) {
-    .main-title span:first-child {
-        font-size: 12vw !important; /* Ajuste fluido para Kelime Lab */
-    }
-
-    .main-title span:last-child {
-        font-size: 9vw !important; /* Ajuste fluido para Gramer */
-    }
+    /* Título más grande para que mande sobre los botones */
+    .main-title span:first-child { font-size: 14vw !important; }
+    .main-title span:last-child { font-size: 10vw !important; }
 
     .version-badge {
         width: 65px !important;
@@ -87,59 +119,15 @@ body {
         margin-top: 15px !important;
     }
 
-    #word {
-        font-size: 1.8rem !important; /* Frases más pequeñas en móvil */
-    }
-}
+    #word { font-size: 1.5rem !important; }
 
-/* --- ESTILOS COMUNES DEL JUEGO --- */
-.screen-content { text-align: center; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-.primary-btn { display: block; width: 240px; font-size: 1.2rem; font-weight: bold; padding: 15px 0; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-.primary-btn:active { transform: scale(0.95); }
-
-#game-container { width: 100%; max-width: 500px; display: none; flex-direction: column; padding: 20px; }
-.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.stats { background: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-.card { background: white; padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
-
-/* Estilo para la frase en turco (Pregunta) */
-#word { 
-    font-size: 1.8rem; 
-    color: var(--primary); 
-    font-weight: 800; 
-    margin-bottom: 5px; 
-}
-
-/* Ajuste automático para que en el móvil sea aún más pequeño */
-@media (max-width: 600px) {
-    #word {
-        font-size: 1.5rem !important;
-    }
-}
-
-/* Estilo para la traducción (se crea por JS) */
-#translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
-
-.options-grid { display: grid; gap: 12px; }
-.option { 
-    background: white; 
-    padding: 18px; 
-    border-radius: 15px; 
-    font-size: 1.3rem; 
-    border: 2px solid transparent; 
-    cursor: pointer; 
-    font-weight: 700; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    text-transform: lowercase; 
-}
-
-/* ESTO ES LO QUE HACER QUE EN EL MÓVIL SE VEAN GRANDES */
-@media (max-width: 600px) {
+    /* Botones más juntos y letra proporcionada */
     .option {
-        font-size: 5.5vw !important; /* La letra crecerá según el ancho del móvil */
-        padding: 22px 15px; /* Botones un poco más altos para tocar mejor */
+        font-size: 4.8vw !important; /* Ajustado para que no sea mayor que el título */
+        padding: 14px 15px !important; /* Altura estrecha */
     }
+    
+    .options-grid { gap: 6px; }
 }
 
 .correct { 
