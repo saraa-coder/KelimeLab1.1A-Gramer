@@ -140,7 +140,7 @@ const allWords = [
     {word:"Geç ___ kaldın?",correct:"mi",translation:"¿Llegaste tarde?"},
     {word:"Erken ___ geldin?",correct:"mi",translation:"¿Llegaste temprano?"},
     {word:"Hızlı ___ konuşuyorsun?",correct:"mı",translation:"¿Estás hablando rápido?"},
-    {word:"Yavaş ___ yürüyorsun?",correct:"mu",translation:"¿Estás caminando despacio?"},
+    {word:"Yavaş yürüyor ___?",correct:"musun",translation:"¿Estás caminando despacio?"},
     {word:"Işık açık ___?",correct:"mı",translation:"¿La luz está encendida?"},
     {word:"Kapı kilitli ___?",correct:"mı",translation:"¿La puerta está cerrada con llave?"},
     {word:"Cam açık ___?",correct:"mı",translation:"¿La ventana está abierta?"},
