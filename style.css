@@ -6,6 +6,15 @@ body {
   text-align: center;
 }
 
+.screen {
+  display: none;
+  padding: 40px;
+}
+
+.screen.active {
+  display: block;
+}
+
 h1 {
   margin-bottom: 30px;
 }
@@ -23,37 +32,64 @@ button:hover {
   opacity: 0.85;
 }
 
-/* TOP BAR */
-.stats-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #1e293b;
+/* HOME */
+#startBtn {
+  background: #22c55e;
+  color: white;
 }
 
-.menu-btn {
+#continueBtn {
+  background: #3b82f6;
+  color: white;
+}
+
+/* TOP BAR */
+.top-bar {
+  position: relative;
+  height: 40px;
+}
+
+#menuBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
   background: #64748b;
   color: white;
 }
 
+#muteBtnGame {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: #334155;
+  color: white;
+}
+
 /* GAME */
-#word {
+#questionBox {
   font-size: 24px;
   margin: 40px 0;
 }
 
-/* CAMBIO SOLICITADO: Alineación vertical y ordenada */
+/* CAMBIO SOLICITADO: Ancho fijo y visualización vertical */
 #options button {
-  display: block;    /* Salen uno debajo de otro */
-  width: 250px;      /* Ancho fijo para que se vean ordenados */
-  margin: 10px auto; /* Centrados y con espacio vertical */
+  display: block;
+  width: 280px;
+  margin: 10px auto;
   background: #1e293b;
   color: white;
-  border: 1px solid #334155;
 }
 
-/* Colores para el JS */
+#feedback {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.audio-controls {
+  margin-top: 20px;
+}
+
+/* Clases necesarias para el funcionamiento del JS */
 #options button.correct {
   background-color: #10b981 !important;
 }
@@ -62,12 +98,11 @@ button:hover {
   background-color: #ef4444 !important;
 }
 
-/* DOTS */
 #dots {
   display: flex;
   justify-content: center;
   gap: 5px;
-  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .dot {
