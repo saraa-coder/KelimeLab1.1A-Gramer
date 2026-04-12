@@ -32,7 +32,7 @@ button:hover {
   opacity: 0.85;
 }
 
-/* PORTADA */
+/* HOME */
 #startBtn {
   background: #22c55e;
   color: white;
@@ -65,7 +65,7 @@ button:hover {
   color: white;
 }
 
-/* JUEGO */
+/* GAME */
 #questionBox {
   font-size: 24px;
   margin: 40px 0;
