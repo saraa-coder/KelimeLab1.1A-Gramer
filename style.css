@@ -124,8 +124,8 @@ body {
 .options-grid { display: grid; gap: 12px; }
 .option { 
     background: white; 
-    /* Altura reducida de 18px a 12px */
-    padding: 12px 15px; 
+    /* Padding vertical mínimo (10px) para que estén más juntos */
+    padding: 10px 15px; 
     border-radius: 15px; 
     font-size: 1.3rem; 
     border: 2px solid transparent; 
@@ -133,20 +133,23 @@ body {
     font-weight: 700; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
     text-transform: lowercase;
-    /* Ajustes para que no sean tan anchos horizontalmente */
-    width: 85%;
-    max-width: 320px;
-    justify-self: center;
+    width: 100%; /* Recuperamos el ancho completo */
+}
+
+/* Reducimos el espacio entre los botones en la rejilla */
+.options-grid { 
+    display: grid; 
+    gap: 8px; /* Antes era 12px, ahora están más apretados */
 }
 
 /* AJUSTES PARA MÓVIL */
 @media (max-width: 600px) {
     .option {
         font-size: 5.5vw !important; 
-        /* Altura reducida de 22px a 14px */
-        padding: 14px 10px !important; 
-        width: 90%;
-        max-width: 280px;
+        padding: 12px 10px !important; /* Altura muy fina para móvil */
+    }
+    .options-grid {
+        gap: 6px; /* Aún más juntos en el móvil */
     }
 }
 
