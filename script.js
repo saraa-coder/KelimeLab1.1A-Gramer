@@ -11,7 +11,7 @@ let muted = false;
 // =====================
 const baseQuiz = [
   {
-    sentence: "Buzdolabında süt ___.",
+    sentence: "Buzdolabında süt ___",
     answer: "var",
     options: ["var", "evet", "tamam", "şimdi"],
     fullCorrect: "Buzdolabında süt var."
@@ -31,13 +31,13 @@ const baseQuiz = [
 
   // ❓ SORU EKİ
   {
-    sentence: "Hava güzel ___.?",
+    sentence: "Hava güzel ___?",
     answer: "mi",
     options: ["mi", "mı", "mu", "mü"],
     fullCorrect: "Hava güzel mi?"
   },
   {
-    sentence: "Sen mutlu ___.?",
+    sentence: "Sen mutlu ___?",
     answer: "musun",
     options: ["musun", "müsün", "misin", "mısın"],
     fullCorrect: "Sen mutlu musun?"
