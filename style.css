@@ -126,12 +126,20 @@ body {
     background: white; 
     padding: 18px; 
     border-radius: 15px; 
-    font-size: 1.3rem; /* Letra más grande */
+    font-size: 1.3rem; 
     border: 2px solid transparent; 
     cursor: pointer; 
-    font-weight: 700; /* Letra más marcada */
+    font-weight: 700; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    text-transform: lowercase; /* Mantiene las minúsculas */
+    text-transform: lowercase; 
+}
+
+/* ESTO ES LO QUE HACER QUE EN EL MÓVIL SE VEAN GRANDES */
+@media (max-width: 600px) {
+    .option {
+        font-size: 5.5vw !important; /* La letra crecerá según el ancho del móvil */
+        padding: 22px 15px; /* Botones un poco más altos para tocar mejor */
+    }
 }
 
 .correct { 
