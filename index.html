@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Turkce Master</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-card">
+        <div class="top-bar">
+            <span id="score">Puntos: 0</span>
+            <div class="icons">
+                <span class="icon-btn" onclick="game.showHint('t')">❓</span>
+                <span class="icon-btn" onclick="game.showHint('r')">📖</span>
+            </div>
+        </div>
+        <div id="question-area">
+            <h1 id="sentence-display"></h1>
+            <div id="hint-display"></div>
+            <div id="rule-display"></div>
+        </div>
+        <div id="options-grid"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
