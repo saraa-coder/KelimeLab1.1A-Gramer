@@ -18,23 +18,40 @@ body {
 /* --- ESTRUCTURA DE PORTADA --- */
 .header-wrapper {
     display: flex;
+    flex-direction: column; /* Por defecto en columna para facilitar el diseño */
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    gap: 10px;
 }
 
 .main-title {
-    display: inline-block;
+    display: flex;
+    flex-direction: column; /* Apila Kelime Lab y Gramer */
+    align-items: center;
     margin: 0 !important;
-    line-height: 1.1;
-    font-size: 4rem;
+    line-height: 1;
     font-weight: 800;
-    /* FORZAMOS EL ROJO ORIGINAL */
+    text-align: center;
+}
+
+/* Primera línea: Kelime Lab */
+.main-title span:first-child {
+    font-size: 4rem;
     background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
-    color: #ff4b2b !important; /* Fallback si falla el degradado */
+}
+
+/* Segunda línea: Gramer */
+.main-title span:last-child {
+    font-size: 3rem;
+    opacity: 0.9;
+    background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
 }
 
 .version-badge {
@@ -48,49 +65,51 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
-    margin-left: 25px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     flex-shrink: 0;
+    margin-top: 10px;
 }
 
-.btn-start {
-    margin-top: 50px;
-    background-color: #1a237e !important;
-    color: #ffffff !important;
-}
-
-/* --- CAMBIOS PARA MÓVIL (PANTALLA PEQUEÑA) --- */
+/* --- AJUSTES PARA MÓVIL --- */
 @media (max-width: 600px) {
-    .header-wrapper {
-        flex-direction: column !important; /* El círculo baja */
+    .main-title span:first-child {
+        font-size: 12vw !important; /* Ajuste fluido para Kelime Lab */
     }
 
-    .main-title {
-        font-size: 2.8rem !important; /* Tamaño para que no se corte */
-        white-space: nowrap;
+    .main-title span:last-child {
+        font-size: 9vw !important; /* Ajuste fluido para Gramer */
     }
 
     .version-badge {
-        margin-left: 0 !important;
-        margin-top: 30px !important; /* SEPARACIÓN DE 30PX */
         width: 65px !important;
         height: 65px !important;
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;
+        margin-top: 15px !important;
+    }
+
+    #word {
+        font-size: 1.8rem !important; /* Frases más pequeñas en móvil */
     }
 }
 
 /* --- ESTILOS COMUNES DEL JUEGO --- */
 .screen-content { text-align: center; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-.primary-btn { display: block; width: 240px; font-size: 1.2rem; font-weight: bold; padding: 15px 0; border: none; border-radius: 50px; cursor: pointer; }
+.primary-btn { display: block; width: 240px; font-size: 1.2rem; font-weight: bold; padding: 15px 0; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
+.primary-btn:active { transform: scale(0.95); }
+
 #game-container { width: 100%; max-width: 500px; display: none; flex-direction: column; padding: 20px; }
 .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.stats { background: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; }
-.card { background: white; padding: 40px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
-#word { font-size: 2.5rem; color: var(--primary); font-weight: 800; margin-bottom: 20px; }
-#dots { display: flex; justify-content: center; gap: 8px; }
-.dot { width: 12px; height: 12px; background: #e0e0e0; border-radius: 50%; }
-.dot.active { background-color: var(--accent); }
+.stats { background: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+.card { background: white; padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
+
+/* Estilo para la frase en turco */
+#word { font-size: 2.2rem; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+
+/* Estilo para la traducción (se crea por JS) */
+#translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
+
 .options-grid { display: grid; gap: 12px; }
-.option { background: white; padding: 18px; border-radius: 15px; font-size: 1.1rem; border: 2px solid transparent; }
+.option { background: white; padding: 18px; border-radius: 15px; font-size: 1.1rem; border: 2px solid transparent; cursor: pointer; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 .correct { background-color: var(--accent) !important; color: white !important; }
 .wrong { background-color: #ff5252 !important; color: white !important; }
