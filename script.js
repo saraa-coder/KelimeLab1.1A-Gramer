@@ -10,57 +10,14 @@ const allWords = [
 {word:"Burası güzel ___?",correct:"mi",translation:"¿Es bonito aquí?"},
 {word:"Onlar hazır ___?",correct:"mı",translation:"¿Están listos?"},
 {word:"Bu doğru ___?",correct:"mu",translation:"¿Es correcto?"},
-{word:"Geliyor ___?",correct:"musun",translation:"¿Vienes?"},
-{word:"Gidiyor ___?",correct:"musun",translation:"¿Te vas?"},
-{word:"Yemek yiyor ___?",correct:"musun",translation:"¿Estás comiendo?"},
-{word:"Beni anlıyor ___?",correct:"musun",translation:"¿Me entiendes?"},
-{word:"Türkçe öğreniyor ___?",correct:"musun",translation:"¿Estás aprendiendo turco?"},
 
 // VAR / YOK
 {word:"Evde süt ___?",correct:"var mı",translation:"¿Hay leche en casa?"},
 {word:"Buzdolabında ekmek ___?",correct:"var mı",translation:"¿Hay pan en el frigorífico?"},
-{word:"Masada kitap ___?",correct:"var mı",translation:"¿Hay un libro en la mesa?"},
-{word:"Çantada kalem ___?",correct:"var mı",translation:"¿Hay un bolígrafo en la mochila?"},
-{word:"Arabada benzin ___?",correct:"var mı",translation:"¿Hay gasolina en el coche?"},
-{word:"Evde kimse ___?",correct:"var mı",translation:"¿Hay alguien en casa?"},
-{word:"Odada kimse ___?",correct:"var mı",translation:"¿Hay alguien en la habitación?"},
-{word:"Cebinde para ___?",correct:"var mı",translation:"¿Tienes dinero en el bolsillo?"},
-{word:"Bugün ders ___?",correct:"var mı",translation:"¿Hay clase hoy?"},
-{word:"Yarın okul ___?",correct:"var mı",translation:"¿Hay colegio mañana?"},
-{word:"Şimdi zaman ___?",correct:"var mı",translation:"¿Hay tiempo ahora?"},
-{word:"Evde internet ___?",correct:"var mı",translation:"¿Hay internet en casa?"},
-{word:"Telefonunda sorun ___?",correct:"var mı",translation:"¿Hay un problema en el teléfono?"},
-{word:"Sınıfta öğretmen ___?",correct:"var mı",translation:"¿Hay profesor en clase?"},
-{word:"Bahçede köpek ___?",correct:"var mı",translation:"¿Hay un perro en el jardín?"},
-{word:"Parkta çocuklar ___?",correct:"var mı",translation:"¿Hay niños en el parque?"},
-{word:"Bu şehirde metro ___?",correct:"var mı",translation:"¿Hay metro en esta ciudad?"},
-{word:"Sokakta trafik ___?",correct:"var mı",translation:"¿Hay tráfico en la calle?"},
-{word:"Buzdolabında su ___?",correct:"var mı",translation:"¿Hay agua en la nevera?"},
-{word:"Masada defter ___?",correct:"var mı",translation:"¿Hay un cuaderno en la mesa?"},
-{word:"Evde yemek ___?",correct:"var mı",translation:"¿Hay comida en casa?"},
-{word:"Şimdi sessizlik ___?",correct:"var mı",translation:"¿Hay silencio ahora?"},
-{word:"Odada ışık ___?",correct:"var mı",translation:"¿Hay luz en la habitación?"},
-{word:"Kapıda anahtar ___?",correct:"var mı",translation:"¿Hay una llave en la puerta?"},
-{word:"Cebinde telefon ___?",correct:"var mı",translation:"¿Hay un teléfono en el bolsillo?"},
-{word:"Bugün toplantı ___?",correct:"var mı",translation:"¿Hay reunión hoy?"},
-{word:"Evde televizyon ___?",correct:"var mı",translation:"¿Hay televisión en casa?"},
-{word:"Sokakta insanlar ___?",correct:"var mı",translation:"¿Hay gente en la calle?"},
-{word:"Okulda sınav ___?",correct:"var mı",translation:"¿Hay examen en la escuela?"},
-{word:"Şehirde sorun ___?",correct:"var mı",translation:"¿Hay problemas en la ciudad?"},
-{word:"Burada otobüs ___?",correct:"var mı",translation:"¿Hay autobús aquí?"},
-{word:"Burada tren ___?",correct:"yok mu",translation:"¿No hay tren aquí?"},
 
-// CASOS + ŞİMDİKİ ZAMAN
+// CASOS
 {word:"Kitabı masa___ koyuyorum",correct:"ya",translation:"Pongo el libro en la mesa"},
 {word:"Suyu bardak___ koyuyorum",correct:"a",translation:"Pongo el agua en el vaso"},
-{word:"Arabayı garaj___ park ediyorum",correct:"a",translation:"Aparco el coche en el garaje"},
-{word:"Ev___ çıkıyorum",correct:"den",translation:"Salgo de casa"},
-{word:"Okul___ gidiyorum",correct:"a",translation:"Voy a la escuela"},
-{word:"Park___ oynuyorum",correct:"ta",translation:"Juego en el parque"},
-{word:"Seni okul___ götürüyorum",correct:"a",translation:"Te llevo a la escuela"},
-{word:"Sütü buzdolabın___ çıkarıyorum",correct:"dan",translation:"Saco la leche de la nevera"},
-{word:"Defteri çanta___ koyuyorum",correct:"ya",translation:"Pongo el cuaderno en la mochila"},
-{word:"Kapı___ açıyorum",correct:"yı",translation:"Abro la puerta"},
 
 // EK-FIIL OLUMSUZ
 {word:"Ben doktor değil ___",correct:"im",translation:"No soy médico"},
@@ -70,41 +27,112 @@ const allWords = [
 {word:"Siz doktor değil ___",correct:"siniz",translation:"No sois médicos"},
 {word:"Onlar doktor ___",correct:"değil",translation:"No son médicos"},
 
-// EK-FIIL OLUMSUZ SORU
+// EK-FIIL OLUMLU SORU
+{word:"Ben mühendis ___?",correct:"miyim",translation:"¿Soy ingeniero?"},
+{word:"Sen pilot ___?",correct:"musun",translation:"¿Eres piloto?"},
+{word:"O kaptan ___?",correct:"mı",translation:"¿Es capitán?"},
+{word:"Biz doktor ___?",correct:"muyuz",translation:"¿Somos médicos?"},
+{word:"Siz diplomat ___?",correct:"mısınız",translation:"¿Sois diplomáticos?"},
+{word:"Onlar ressam ___?",correct:"mı",translation:"¿Son pintores?"},
+
+// ==============================
+// EK-FIIL OLUMSUZ SORU (CORRECTO)
+// ==============================
 
 // BEN
-{word:"Ben pilot değil ___?",correct:"miyim",translation:"¿No soy piloto?"},
-{word:"Ben aşçı değil ___?",correct:"miyim",translation:"¿No soy cocinero?"},
-{word:"Ben yorgun değil ___?",correct:"miyim",translation:"¿No estoy cansado?"},
-{word:"Ben hazır değil ___?",correct:"miyim",translation:"¿No estoy listo?"},
-{word:"Ben dikkatli değil ___?",correct:"miyim",translation:"¿No soy cuidadoso?"},
-{word:"Ben sakin değil ___?",correct:"miyim",translation:"¿No estoy tranquilo?"},
-{word:"Ben hızlı değil ___?",correct:"miyim",translation:"¿No soy rápido?"},
-{word:"Ben güçlü değil ___?",correct:"miyim",translation:"¿No soy fuerte?"},
-{word:"Ben temiz değil ___?",correct:"miyim",translation:"¿No estoy limpio?"},
-{word:"Ben zengin değil ___?",correct:"miyim",translation:"¿No soy rico?"},
+{word:"Ben doktor değil ___?",correct:"miyim",translation:"¿No soy médico?"},
+{word:"Ben öğretmen değil ___?",correct:"miyim",translation:"¿No soy profesor?"},
+{word:"Ben mutlu değil ___?",correct:"miyim",translation:"¿No soy feliz?"},
 
 // SEN
-{word:"Sen pilot değil ___?",correct:"misin",translation:"¿No eres piloto?"},
-{word:"Sen aşçı değil ___?",correct:"misin",translation:"¿No eres cocinero?"},
+{word:"Sen öğrenci değil ___?",correct:"misin",translation:"¿No eres estudiante?"},
 {word:"Sen yorgun değil ___?",correct:"misin",translation:"¿No estás cansado?"},
 {word:"Sen hazır değil ___?",correct:"misin",translation:"¿No estás listo?"},
-{word:"Sen dikkatli değil ___?",correct:"misin",translation:"¿No eres cuidadoso?"},
-{word:"Sen sakin değil ___?",correct:"misin",translation:"¿No estás tranquilo?"},
-{word:"Sen hızlı değil ___?",correct:"misin",translation:"¿No eres rápido?"},
-{word:"Sen güçlü değil ___?",correct:"misin",translation:"¿No eres fuerte?"},
-{word:"Sen temiz değil ___?",correct:"misin",translation:"¿No estás limpio?"},
-{word:"Sen zengin değil ___?",correct:"misin",translation:"¿No eres rico?"},
 
 // O
-{word:"O pilot değil ___?",correct:"mi",translation:"¿No es piloto?"},
-{word:"O aşçı değil ___?",correct:"mi",translation:"¿No es cocinero?"},
-{word:"O yorgun değil ___?",correct:"mi",translation:"¿No está cansado?"},
-{word:"O hazır değil ___?",correct:"mi",translation:"¿No está listo?"},
-{word:"O dikkatli değil ___?",correct:"mi",translation:"¿No es cuidadoso?"},
-{word:"O sakin değil ___?",correct:"mi",translation:"¿No está tranquilo?"},
-{word:"O hızlı değil ___?",correct:"mi",translation:"¿No es rápido?"},
-{word:"O güçlü değil ___?",correct:"mi",translation:"¿No es fuerte?"},
-{word:"O temiz değil ___?",correct:"mi",translation:"¿No está limpio?"},
-{word:"O zengin değil ___?",correct:"mi",translation:"¿No es rico?"}
+{word:"O doktor değil ___?",correct:"mi",translation:"¿No es médico?"},
+{word:"O mutlu değil ___?",correct:"mi",translation:"¿No está feliz?"},
+{word:"O açık değil ___?",correct:"mi",translation:"¿No está abierto?"},
+
+// BİZ
+{word:"Biz öğrenci değil ___?",correct:"miyiz",translation:"¿No somos estudiantes?"},
+{word:"Biz hazır değil ___?",correct:"miyiz",translation:"¿No estamos listos?"},
+{word:"Biz mutlu değil ___?",correct:"miyiz",translation:"¿No estamos felices?"},
+
+// SİZ
+{word:"Siz doktor değil ___?",correct:"misiniz",translation:"¿No sois médicos?"},
+{word:"Siz yorgun değil ___?",correct:"misiniz",translation:"¿No estáis cansados?"},
+{word:"Siz hazır değil ___?",correct:"misiniz",translation:"¿No estáis listos?"},
+
+// ONLAR
+{word:"Onlar doktor değil ___?",correct:"mi",translation:"¿No son médicos?"},
+{word:"Onlar mutlu değil ___?",correct:"mi",translation:"¿No están felices?"},
+{word:"Onlar açık değil ___?",correct:"mi",translation:"¿No están abiertos?"}
 ];
+
+
+// 2. VARIABLES
+let activeQueue = [];
+let current = null;
+let locked = false;
+
+let score = 0;
+
+// 3. START
+function startGame() {
+    activeQueue = [...allWords];
+    loadQuestion();
+}
+
+// 4. LOGICA
+function loadQuestion() {
+    locked = false;
+
+    current = activeQueue[Math.floor(Math.random() * activeQueue.length)];
+
+    const wordElement = document.getElementById("word");
+    const optionsContainer = document.getElementById("options");
+
+    wordElement.innerHTML = `
+        <div>${current.word}</div>
+        <div class="translation">${current.translation}</div>
+    `;
+
+    let opts = new Set([current.correct]);
+
+    while (opts.size < 4) {
+        let randomItem = allWords[Math.floor(Math.random() * allWords.length)];
+        opts.add(randomItem.correct);
+    }
+
+    optionsContainer.innerHTML = "";
+
+    [...opts].sort(() => Math.random() - 0.5).forEach(opt => {
+        let btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => handleAnswer(opt, btn);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function handleAnswer(selected, btn) {
+    if (locked) return;
+    locked = true;
+
+    document.querySelectorAll(".option").forEach(b => {
+        if (b.textContent === current.correct) {
+            b.classList.add("correct");
+        }
+    });
+
+    if (selected === current.correct) {
+        score++;
+    } else {
+        btn.classList.add("wrong");
+    }
+
+    setTimeout(loadQuestion, 700);
+}
+
+window.onload = startGame;
