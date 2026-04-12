@@ -1,5 +1,5 @@
 // =====================
-// 🧠 ESTADO GLOBAL
+// 🧠 STATE
 // =====================
 let quiz = [];
 let currentIndex = 0;
@@ -7,33 +7,40 @@ let score = 0;
 let muted = false;
 
 // =====================
-// 📦 QUIZ BASE
+// 📦 QUIZ BASE (SIN AMBIGÜEDADES)
 // =====================
 const baseQuiz = [
   {
     sentence: "Buzdolabında süt ___.",
     answer: "var",
-    options: ["var", "yok", "evet", "hayır"]
+    options: ["var", "evet", "tamam", "şimdi"],
+    fullCorrect: "Buzdolabında süt var."
   },
   {
     sentence: "Valizde telefon ___.",
     answer: "yok",
-    options: ["var", "yok", "tamam", "şimdi"]
+    options: ["yok", "evet", "tamam", "şimdi"],
+    fullCorrect: "Valizde telefon yok."
   },
   {
     sentence: "Evde internet ___.",
     answer: "yok",
-    options: ["var", "yok", "iyi", "burada"]
+    options: ["yok", "evet", "tamam", "şimdi"],
+    fullCorrect: "Evde internet yok."
   },
+
+  // ❓ SORU EKİ
   {
-    sentence: "Hava güzel ___.",
+    sentence: "Hava güzel ___.?",
     answer: "mi",
-    options: ["mi", "mı", "mu", "mü"]
+    options: ["mi", "mı", "mu", "mü"],
+    fullCorrect: "Hava güzel mi?"
   },
   {
-    sentence: "Sen mutlu ___.",
+    sentence: "Sen mutlu ___.?",
     answer: "musun",
-    options: ["misin", "mısın", "musun", "müsün"]
+    options: ["musun", "müsün", "misin", "mısın"],
+    fullCorrect: "Sen mutlu musun?"
   }
 ];
 
@@ -71,7 +78,7 @@ document.getElementById("continueBtn").onclick = () => {
 };
 
 // =====================
-// 🏠 MENÜ
+// 🏠 MENU
 // =====================
 document.getElementById("menuBtn").onclick = () => {
   showHome();
@@ -97,7 +104,6 @@ function updateMuteUI() {
 // =====================
 function loadQuestion() {
   const q = quiz[currentIndex];
-
   if (!q) return;
 
   document.getElementById("questionBox").innerText = q.sentence;
@@ -109,39 +115,45 @@ function loadQuestion() {
     const btn = document.createElement("button");
     btn.innerText = opt;
 
-    btn.onclick = () => checkAnswer(opt, q.answer);
+    btn.onclick = () => checkAnswer(opt, q);
 
     optionsDiv.appendChild(btn);
   });
-
-  speak(q.sentence);
 }
 
 // =====================
-// 🎯 CHECK ANSWER (NUEVO SISTEMA VISUAL)
+// 🎯 CHECK ANSWER (VISUAL SYSTEM)
 // =====================
-function checkAnswer(selected, correct) {
+function checkAnswer(selected, q) {
   const buttons = document.querySelectorAll("#options button");
+
+  const correct = q.answer;
+
+  const isCorrect = selected === correct;
 
   buttons.forEach(btn => {
     btn.disabled = true;
 
     const value = btn.innerText;
 
-    // siempre mostrar correcta en verde
+    // correcta en verde
     if (value === correct) {
       btn.style.background = "#22c55e";
     }
 
-    // si es la seleccionada y es incorrecta → rojo
-    if (value === selected && selected !== correct) {
+    // seleccion incorrecta en rojo
+    if (value === selected && !isCorrect) {
       btn.style.background = "#ef4444";
     }
   });
 
-  if (selected === correct) {
-    score++;
-  }
+  if (isCorrect) score++;
+
+  // 🧠 frase correcta para audio
+  const correctSentence =
+    q.fullCorrect || q.sentence.replace("___", correct);
+
+  speak(correctSentence);
 
   currentIndex++;
   saveProgress();
@@ -155,11 +167,11 @@ function checkAnswer(selected, correct) {
 
       localStorage.removeItem("kelimer_lab");
     }
-  }, 900);
+  }, 1200);
 }
 
 // =====================
-// 💾 SAVE
+// 💾 SAVE PROGRESS
 // =====================
 function saveProgress() {
   localStorage.setItem("kelimer_lab", JSON.stringify({
@@ -170,7 +182,7 @@ function saveProgress() {
 }
 
 // =====================
-// 🔊 TTS (Emel si existe)
+// 🔊 TEXT TO SPEECH
 // =====================
 function speak(text) {
   if (muted) return;
@@ -196,7 +208,7 @@ function shuffle(arr) {
 }
 
 // =====================
-// 🖥️ SCREEN CONTROL
+// 🖥️ SCREENS
 // =====================
 function showGame() {
   document.getElementById("home").classList.remove("active");
