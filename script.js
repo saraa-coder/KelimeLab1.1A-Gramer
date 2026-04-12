@@ -4,8 +4,7 @@
  */
 
 // 1. BASE DE DATOS DE PALABRAS
-const allWords = [
- {word: "Bu sen ___?", correct: "misin"},
+const allWords = [ {word: "Bu sen ___?", correct: "misin"},
   {word: "O öğrenci ___?", correct: "mi"},
   {word: "Bu kitap ___?", correct: "mı"},
   {word: "Ev büyük ___?", correct: "mü"},
