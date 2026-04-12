@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Turkce Master</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kelimer Lab 1.1A Gramer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="game-card">
-        <div class="top-bar">
-            <span id="score">Puntos: 0</span>
-            <div class="icons">
-                <span class="icon-btn" onclick="game.showHint('t')">❓</span>
-                <span class="icon-btn" onclick="game.showHint('r')">📖</span>
-            </div>
-        </div>
-        <div id="question-area">
-            <h1 id="sentence-display"></h1>
-            <div id="hint-display"></div>
-            <div id="rule-display"></div>
-        </div>
-        <div id="options-grid"></div>
+
+  <!-- 🟣 PORTADA -->
+  <div id="home" class="screen active">
+    <h1>Kelimer Lab 1.1A Gramer</h1>
+
+    <button id="startBtn">Başla</button>
+    <button id="continueBtn">Devam et</button>
+
+    <div class="audio-controls">
+      <button id="muteBtn">🔊 Audio ON</button>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <!-- 🎮 JUEGO -->
+  <div id="game" class="screen">
+
+    <div class="top-bar">
+      <button id="menuBtn">Menü</button>
+      <button id="muteBtnGame">🔊</button>
+    </div>
+
+    <div id="questionBox"></div>
+
+    <div id="options"></div>
+
+    <div id="feedback"></div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
