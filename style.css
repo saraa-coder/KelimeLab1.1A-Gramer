@@ -124,21 +124,29 @@ body {
 .options-grid { display: grid; gap: 12px; }
 .option { 
     background: white; 
-    padding: 18px; 
+    /* Altura reducida de 18px a 12px */
+    padding: 12px 15px; 
     border-radius: 15px; 
     font-size: 1.3rem; 
     border: 2px solid transparent; 
     cursor: pointer; 
     font-weight: 700; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    text-transform: lowercase; 
+    text-transform: lowercase;
+    /* Ajustes para que no sean tan anchos horizontalmente */
+    width: 85%;
+    max-width: 320px;
+    justify-self: center;
 }
 
-/* ESTO ES LO QUE HACER QUE EN EL MÓVIL SE VEAN GRANDES */
+/* AJUSTES PARA MÓVIL */
 @media (max-width: 600px) {
     .option {
-        font-size: 5.5vw !important; /* La letra crecerá según el ancho del móvil */
-        padding: 22px 15px; /* Botones un poco más altos para tocar mejor */
+        font-size: 5.5vw !important; 
+        /* Altura reducida de 22px a 14px */
+        padding: 14px 10px !important; 
+        width: 90%;
+        max-width: 280px;
     }
 }
 
