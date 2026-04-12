@@ -65,28 +65,28 @@
 </head>
 <body>
 
-    <div id="start-screen" class="screen-content">
+   <div id="start-screen" class="screen-content">
         <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
             
             <h1 class="main-title" style="display: inline-block; margin: 0; line-height: 1;">
-                <span style="background: linear-gradient(180deg, #ffcdd2 5%, #b71c1c 85%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelime Lab</span>
+                <span style="background: linear-gradient(180deg, #ffcdd2 5%, #b71c1c 85%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelime Lab-Gramer</span>
             </h1>
 
             <div style="
                 background: linear-gradient(180deg, #ff0000 0%, #990000 100%);
                 color: white;
                 font-family: inherit;
-                font-size: 2rem;
+                font-size: 1.8rem;
                 font-weight: 900;
                 border-radius: 50%;
-                width: 75px;
-                height: 75px;
+                width: 65px;
+                height: 65px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
                 flex-shrink: 0;
-                margin-left: 25px;
+                margin-left: 15px;
                 line-height: 1;
             ">
                 1.1A
@@ -102,11 +102,11 @@
         </button>
     </div>
 
-    <div id="game-container">
+    <div id="game-container" style="display: none; flex-direction: column;">
         <div class="topbar">
             <div class="stats">
                 <span id="score">0 tamamlanan</span>
-                <span id="percent">%0</span>
+                <span id="percent"></span>
             </div>
             <button class="stats" onclick="location.reload()">Menü</button>
         </div>
