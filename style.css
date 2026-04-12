@@ -1,45 +1,37 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
   background: #0f172a;
   color: white;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-#start-screen, #game-container {
-  width: 90%;
-  max-width: 500px;
-  padding: 20px;
+  text-align: center;
 }
 
 h1 {
-  font-size: 2rem;
   margin-bottom: 30px;
-  color: #f8fafc;
+  padding-top: 20px;
 }
 
-/* BOTONES PRINCIPALES */
-.primary-btn {
-  padding: 15px 25px;
-  margin: 8px;
+button {
+  padding: 12px 20px;
+  margin: 10px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
-  color: white;
-  transition: transform 0.2s, opacity 0.2s;
-  width: 100%;
-  max-width: 300px;
+  transition: opacity 0.2s;
 }
 
-.primary-btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
+button:hover {
+  opacity: 0.85;
+}
+
+/* Estilos para los botones de la pantalla de inicio */
+.primary-btn {
+  display: inline-block;
+  width: 80%;
+  max-width: 300px;
+  color: white;
+  font-weight: bold;
 }
 
 /* BARRA DE ESTADÍSTICAS */
@@ -47,84 +39,56 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 10px 20px;
   background: #1e293b;
-  padding: 10px 15px;
-  border-radius: 15px;
 }
 
 .menu-btn {
-  background: #475569;
+  background: #64748b;
   color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  cursor: pointer;
+  margin: 0;
 }
 
-.stats-info {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* PALABRA PREGUNTA */
+/* JUEGO */
 #word {
   font-size: 28px;
-  font-weight: bold;
   margin: 40px 0;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: bold;
 }
 
-/* CONTENEDOR DE OPCIONES (BOTONES ORDENADOS) */
+/* CORRECCIÓN DE LOS BOTONES DE OPCIONES */
 #options {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-  gap: 12px; /* Espacio entre botones */
-  width: 100%;
+  display: flex;
+  flex-direction: column; /* Salen uno debajo de otro para mantener el estilo original */
+  align-items: center;
+  gap: 5px;
 }
 
 #options button {
-  padding: 18px 10px;
+  display: block;
+  width: 280px; /* Ancho fijo para que todos se vean iguales */
+  margin: 5px auto;
   background: #1e293b;
   color: white;
-  border: 2px solid #334155;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60px;
+  border: 1px solid #334155;
+  min-height: 50px; /* Altura mínima por si hay texto largo */
 }
 
-#options button:hover {
-  background: #334155;
-  border-color: #475569;
-}
-
-/* COLORES DE RESPUESTA */
+/* Colores de validación para el script.js */
 #options button.correct {
   background-color: #10b981 !important;
-  border-color: #059669 !important;
-  color: white;
 }
 
 #options button.wrong {
   background-color: #ef4444 !important;
-  border-color: #dc2626 !important;
-  color: white;
 }
 
-/* PUNTOS DE PROGRESO (DOTS) */
+/* DOTS DE PROGRESO */
 #dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 5px;
+  margin-top: 15px;
 }
 
 .dot {
@@ -132,20 +96,15 @@ h1 {
   height: 10px;
   border-radius: 50%;
   background: #334155;
-  transition: background 0.3s;
 }
 
 .dot.active {
   background: #fbbf24;
 }
 
-/* RESPONSIVO PARA MÓVILES PEQUEÑOS */
-@media (max-width: 400px) {
-  #options {
-    grid-template-columns: 1fr; /* Una sola columna si la pantalla es muy estrecha */
-  }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
+/* Clases que usa el JS para animar el éxito */
+.word-mastered {
+  color: #fbbf24;
+  transform: scale(1.1);
+  transition: all 0.3s;
 }
