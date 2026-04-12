@@ -1,5 +1,5 @@
 // =====================
-// 🧠 STATE
+// 🧠 ESTADO GLOBAL
 // =====================
 let quiz = [];
 let currentIndex = 0;
@@ -7,7 +7,7 @@ let score = 0;
 let muted = false;
 
 // =====================
-// 📦 BASE QUIZ
+// 📦 QUIZ BASE
 // =====================
 const baseQuiz = [
   {
@@ -44,6 +44,7 @@ document.getElementById("startBtn").onclick = () => {
   quiz = shuffle([...baseQuiz]);
   currentIndex = 0;
   score = 0;
+
   saveProgress();
   showGame();
   loadQuestion();
@@ -55,12 +56,14 @@ document.getElementById("startBtn").onclick = () => {
 document.getElementById("continueBtn").onclick = () => {
   const saved = JSON.parse(localStorage.getItem("kelimer_lab"));
 
-  if (saved) {
+  if (saved && saved.quiz) {
     quiz = saved.quiz;
     currentIndex = saved.index;
     score = saved.score;
   } else {
     quiz = shuffle([...baseQuiz]);
+    currentIndex = 0;
+    score = 0;
   }
 
   showGame();
@@ -68,7 +71,7 @@ document.getElementById("continueBtn").onclick = () => {
 };
 
 // =====================
-// 🏠 MENU
+// 🏠 MENÜ
 // =====================
 document.getElementById("menuBtn").onclick = () => {
   showHome();
@@ -90,10 +93,12 @@ function updateMuteUI() {
 }
 
 // =====================
-// 🎮 GAME LOGIC
+// 🎮 LOAD QUESTION
 // =====================
 function loadQuestion() {
   const q = quiz[currentIndex];
+
+  if (!q) return;
 
   document.getElementById("questionBox").innerText = q.sentence;
 
@@ -112,6 +117,9 @@ function loadQuestion() {
   speak(q.sentence);
 }
 
+// =====================
+// 🎯 CHECK ANSWER (NUEVO SISTEMA VISUAL)
+// =====================
 function checkAnswer(selected, correct) {
   const buttons = document.querySelectorAll("#options button");
 
@@ -120,7 +128,7 @@ function checkAnswer(selected, correct) {
 
     const value = btn.innerText;
 
-    // correcta siempre verde
+    // siempre mostrar correcta en verde
     if (value === correct) {
       btn.style.background = "#22c55e";
     }
@@ -144,11 +152,7 @@ function checkAnswer(selected, correct) {
     } else {
       document.getElementById("feedback").innerText =
         `🎉 Bitti! Score: ${score}/${quiz.length}`;
-      localStorage.removeItem("kelimer_lab");
-    }
-  }, 900);
-}
-      feedback.innerText = `🎉 Bitti! Score: ${score}/${quiz.length}`;
+
       localStorage.removeItem("kelimer_lab");
     }
   }, 900);
@@ -166,7 +170,7 @@ function saveProgress() {
 }
 
 // =====================
-// 🔊 TTS
+// 🔊 TTS (Emel si existe)
 // =====================
 function speak(text) {
   if (muted) return;
@@ -177,6 +181,7 @@ function speak(text) {
 
   const voices = speechSynthesis.getVoices();
   const emel = voices.find(v => v.name.includes("Emel"));
+
   if (emel) utter.voice = emel;
 
   speechSynthesis.cancel();
@@ -191,7 +196,7 @@ function shuffle(arr) {
 }
 
 // =====================
-// 🖥️ SCREENS
+// 🖥️ SCREEN CONTROL
 // =====================
 function showGame() {
   document.getElementById("home").classList.remove("active");
