@@ -70,205 +70,41 @@ const allWords = [
 {word:"Siz doktor değil ___",correct:"siniz",translation:"No sois médicos"},
 {word:"Onlar doktor ___",correct:"değil",translation:"No son médicos"},
 
-{word:"Ben mutlu değil ___",correct:"im",translation:"No soy feliz"},
-{word:"Sen mutlu değil ___",correct:"sin",translation:"No eres feliz"},
-{word:"O mutlu ___",correct:"değil",translation:"No es feliz"},
-{word:"Biz mutlu değil ___",correct:"iz",translation:"No somos felices"},
-{word:"Siz mutlu değil ___",correct:"siniz",translation:"No sois felices"},
-{word:"Onlar mutlu ___",correct:"değil",translation:"No son felices"},
-
-// EK-FIIL OLUMLU SORU
+// EK-FIIL OLUMSUZ SORU
 
 // BEN
-{word:"Ben mühendis ___?",correct:"miyim",translation:"¿Soy ingeniero?"},
-{word:"Ben cerrah ___?",correct:"mıyım",translation:"¿Soy cirujano?"},
-{word:"Ben pilot ___?",correct:"muyum",translation:"¿Soy piloto?"},
-{word:"Ben avukat ___?",correct:"mıyım",translation:"¿Soy abogado?"},
-{word:"Ben mimar ___?",correct:"mıyım",translation:"¿Soy arquitecto?"},
-{word:"Ben psikolog ___?",correct:"muyum",translation:"¿Soy psicólogo?"},
-{word:"Ben şef ___?",correct:"miyim",translation:"¿Soy chef?"},
-{word:"Ben programcı ___?",correct:"mıyım",translation:"¿Soy programador?"},
-{word:"Ben gazeteci ___?",correct:"miyim",translation:"¿Soy periodista?"},
-{word:"Ben fotoğrafçı ___?",correct:"mıyım",translation:"¿Soy fotógrafo?"},
+{word:"Ben pilot değil ___?",correct:"miyim",translation:"¿No soy piloto?"},
+{word:"Ben aşçı değil ___?",correct:"miyim",translation:"¿No soy cocinero?"},
+{word:"Ben yorgun değil ___?",correct:"miyim",translation:"¿No estoy cansado?"},
+{word:"Ben hazır değil ___?",correct:"miyim",translation:"¿No estoy listo?"},
+{word:"Ben dikkatli değil ___?",correct:"miyim",translation:"¿No soy cuidadoso?"},
+{word:"Ben sakin değil ___?",correct:"miyim",translation:"¿No estoy tranquilo?"},
+{word:"Ben hızlı değil ___?",correct:"miyim",translation:"¿No soy rápido?"},
+{word:"Ben güçlü değil ___?",correct:"miyim",translation:"¿No soy fuerte?"},
+{word:"Ben temiz değil ___?",correct:"miyim",translation:"¿No estoy limpio?"},
+{word:"Ben zengin değil ___?",correct:"miyim",translation:"¿No soy rico?"},
 
 // SEN
-{word:"Sen itfaiyeci ___?",correct:"misin",translation:"¿Eres bombero?"},
-{word:"Sen dişçi ___?",correct:"misin",translation:"¿Eres dentista?"},
-{word:"Sen mühendis ___?",correct:"misin",translation:"¿Eres ingeniero?"},
-{word:"Sen pilot ___?",correct:"musun",translation:"¿Eres piloto?"},
-{word:"Sen aşçı ___?",correct:"mısın",translation:"¿Eres cocinero?"},
-{word:"Sen hemşire ___?",correct:"misin",translation:"¿Eres enfermero?"},
-{word:"Sen sporcu ___?",correct:"musun",translation:"¿Eres deportista?"},
-{word:"Sen yorgun ___?",correct:"musun",translation:"¿Estás cansado?"},
-{word:"Sen sakin ___?",correct:"misin",translation:"¿Estás tranquilo?"},
-{word:"Sen heyecanlı ___?",correct:"mısın",translation:"¿Estás emocionado?"},
+{word:"Sen pilot değil ___?",correct:"misin",translation:"¿No eres piloto?"},
+{word:"Sen aşçı değil ___?",correct:"misin",translation:"¿No eres cocinero?"},
+{word:"Sen yorgun değil ___?",correct:"misin",translation:"¿No estás cansado?"},
+{word:"Sen hazır değil ___?",correct:"misin",translation:"¿No estás listo?"},
+{word:"Sen dikkatli değil ___?",correct:"misin",translation:"¿No eres cuidadoso?"},
+{word:"Sen sakin değil ___?",correct:"misin",translation:"¿No estás tranquilo?"},
+{word:"Sen hızlı değil ___?",correct:"misin",translation:"¿No eres rápido?"},
+{word:"Sen güçlü değil ___?",correct:"misin",translation:"¿No eres fuerte?"},
+{word:"Sen temiz değil ___?",correct:"misin",translation:"¿No estás limpio?"},
+{word:"Sen zengin değil ___?",correct:"misin",translation:"¿No eres rico?"},
 
 // O
-{word:"O kaptan ___?",correct:"mı",translation:"¿Es capitán?"},
-{word:"O terzi ___?",correct:"mi",translation:"¿Es sastre?"},
-{word:"O marangoz ___?",correct:"mu",translation:"¿Es carpintero?"},
-{word:"O müzisyen ___?",correct:"mi",translation:"¿Es músico?"},
-{word:"O ressam ___?",correct:"mı",translation:"¿Es pintor?"},
-{word:"O atlet ___?",correct:"mi",translation:"¿Es atleta?"},
-{word:"O rehber ___?",correct:"mi",translation:"¿Es guía?"},
-{word:"O kasap ___?",correct:"mı",translation:"¿Es carnicero?"},
-{word:"O çevirmen ___?",correct:"mi",translation:"¿Es traductor?"},
-{word:"O şoför ___?",correct:"mü",translation:"¿Es conductor?"},
-
-// BİZ
-{word:"Biz mimar ___?",correct:"mıyız",translation:"¿Somos arquitectos?"},
-{word:"Biz doktor ___?",correct:"muyuz",translation:"¿Somos médicos?"},
-{word:"Biz avukat ___?",correct:"mıyız",translation:"¿Somos abogados?"},
-{word:"Biz öğretmen ___?",correct:"miyiz",translation:"¿Somos profesores?"},
-{word:"Biz mühendis ___?",correct:"miyiz",translation:"¿Somos ingenieros?"},
-{word:"Biz pilot ___?",correct:"muyuz",translation:"¿Somos pilotos?"},
-{word:"Biz sporcu ___?",correct:"muyuz",translation:"¿Somos deportistas?"},
-{word:"Biz sakin ___?",correct:"miyiz",translation:"¿Estamos tranquilos?"},
-{word:"Biz mutlu ___?",correct:"muyuz",translation:"¿Estamos felices?"},
-{word:"Biz hazır ___?",correct:"mıyız",translation:"¿Estamos listos?"},
-
-// SİZ
-{word:"Siz diplomat ___?",correct:"mısınız",translation:"¿Sois diplomáticos?"},
-{word:"Siz akademisyen ___?",correct:"misiniz",translation:"¿Sois académicos?"},
-{word:"Siz girişimci ___?",correct:"misiniz",translation:"¿Sois emprendedores?"},
-{word:"Siz editör ___?",correct:"müsünüz",translation:"¿Sois editores?"},
-{word:"Siz tasarımcı ___?",correct:"mısınız",translation:"¿Sois diseñadores?"},
-{word:"Siz danışman ___?",correct:"mısınız",translation:"¿Sois consultores?"},
-{word:"Siz teknisyen ___?",correct:"misiniz",translation:"¿Sois técnicos?"},
-{word:"Siz organize ___?",correct:"misiniz",translation:"¿Sois organizados?"},
-{word:"Siz dikkatli ___?",correct:"misiniz",translation:"¿Sois cuidadosos?"},
-{word:"Siz enerjik ___?",correct:"misiniz",translation:"¿Sois enérgicos?"},
-
-// ONLAR
-{word:"Onlar kaptan ___?",correct:"mı",translation:"¿Son capitanes?"},
-{word:"Onlar ressam ___?",correct:"mı",translation:"¿Son pintores?"},
-{word:"Onlar müzisyen ___?",correct:"mi",translation:"¿Son músicos?"},
-{word:"Onlar pilot ___?",correct:"mu",translation:"¿Son pilotos?"},
-{word:"Onlar şoför ___?",correct:"mü",translation:"¿Son conductores?"},
-{word:"Onlar çevirmen ___?",correct:"mi",translation:"¿Son traductores?"},
-{word:"Onlar atlet ___?",correct:"mi",translation:"¿Son atletas?"},
-{word:"Onlar kasap ___?",correct:"mı",translation:"¿Son carniceros?"},
-{word:"Onlar rehber ___?",correct:"mi",translation:"¿Son guías?"},
-{word:"Onlar marangoz ___?",correct:"mu",translation:"¿Son carpinteros?"}
+{word:"O pilot değil ___?",correct:"mi",translation:"¿No es piloto?"},
+{word:"O aşçı değil ___?",correct:"mi",translation:"¿No es cocinero?"},
+{word:"O yorgun değil ___?",correct:"mi",translation:"¿No está cansado?"},
+{word:"O hazır değil ___?",correct:"mi",translation:"¿No está listo?"},
+{word:"O dikkatli değil ___?",correct:"mi",translation:"¿No es cuidadoso?"},
+{word:"O sakin değil ___?",correct:"mi",translation:"¿No está tranquilo?"},
+{word:"O hızlı değil ___?",correct:"mi",translation:"¿No es rápido?"},
+{word:"O güçlü değil ___?",correct:"mi",translation:"¿No es fuerte?"},
+{word:"O temiz değil ___?",correct:"mi",translation:"¿No está limpio?"},
+{word:"O zengin değil ___?",correct:"mi",translation:"¿No es rico?"}
 ];
-
-
-// 2. VARIABLES
-let pool = [];
-let activeQueue = [];
-let current = null;
-let lastWord = null;
-let locked = false;
-let gameMode = 'tr-es';
-let currentRoundMode = 'tr-es';
-
-const BLOCK_SIZE = 10;
-const MASTERY_THRESHOLD = 3;
-
-let score = 0;
-let progress = {};
-
-// 3. INTERFAZ
-function showMenu() {
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('start-screen').style.display = '';
-}
-
-function setMode(mode, e) {
-    gameMode = mode;
-
-    document.querySelectorAll('#mode-selector .primary-btn').forEach(btn => {
-        btn.style.opacity = "0.5";
-    });
-
-    if (e && e.currentTarget) {
-        e.currentTarget.style.opacity = "1";
-    }
-}
-
-function resetAndStart() {
-    score = 0;
-    progress = {};
-    startGame();
-}
-
-function startGame() {
-    document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-container').style.display = 'flex';
-    initBlocks();
-    updateUI();
-    loadQuestion();
-}
-
-// 4. LÓGICA
-function initBlocks() {
-    activeQueue = [...allWords];
-}
-
-function updateUI() {
-    let total = allWords.length;
-    let percent = Math.round((score / total) * 100);
-
-    document.getElementById("score").textContent = score + " tamamlanan";
-    document.getElementById("percent").textContent = "%" + percent;
-}
-
-function loadQuestion() {
-    locked = false;
-
-    current = activeQueue[Math.floor(Math.random() * activeQueue.length)];
-
-    const wordElement = document.getElementById("word");
-    const optionsContainer = document.getElementById("options");
-
-    wordElement.innerHTML = `
-        <div>${current.word}</div>
-        <div class="translation">${current.translation}</div>
-    `;
-
-    let opts = new Set([current.correct]);
-
-    while (opts.size < 4) {
-        let randomItem = allWords[Math.floor(Math.random() * allWords.length)];
-        opts.add(randomItem.correct);
-    }
-
-    optionsContainer.innerHTML = "";
-
-    [...opts].sort(() => Math.random() - 0.5).forEach(opt => {
-        let btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = opt;
-        btn.onclick = () => handleAnswer(opt, btn);
-        optionsContainer.appendChild(btn);
-    });
-}
-
-function handleAnswer(selected, btn) {
-    if (locked) return;
-    locked = true;
-
-    document.querySelectorAll(".option").forEach(b => {
-        if (b.textContent === current.correct) {
-            b.classList.add("correct");
-        }
-    });
-
-    if (selected === current.correct) {
-        score++;
-    } else {
-        btn.classList.add("wrong");
-    }
-
-    updateUI();
-
-    setTimeout(loadQuestion, 700);
-}
-
-// INICIO
-window.onload = () => {
-    const firstBtn = document.querySelector('#mode-selector button');
-    if (firstBtn) {
-        setMode('tr-es', { currentTarget: firstBtn });
-    }
-};
