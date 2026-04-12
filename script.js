@@ -1,6 +1,7 @@
 /**
- * MOTOR DE GRAMÁTICA TURCA PROFESIONAL
+ * TURKCE MASTER - MOTOR DE GENERACIÓN DINÁMICA
  */
+
 const TR = {
     vowels: "aeıioöuü",
     sordas: "fstkçşhp",
@@ -33,7 +34,6 @@ const TR = {
         let base = root;
         if (root === "git") base = "gid";
         if ("aeıioöuü".includes(root.slice(-1))) base = root.slice(0, -1);
-        
         const connector = (root === "ye") ? "i" : h4;
         return base + connector + "yor" + pSuf[person];
     }
@@ -43,29 +43,35 @@ const game = {
     score: 0,
     curr: null,
 
+    // Diccionario extendido y clasificado
     nouns: {
         objects: [
             { w: "elma", m: "la manzana" }, { w: "ekmek", m: "el pan" },
             { w: "kitap", m: "el libro" }, { w: "kapı", m: "la puerta" },
-            { w: "su", m: "el agua" }, { w: "gazete", m: "el periódico" }
+            { w: "su", m: "el agua" }, { w: "gazete", m: "el periódico" },
+            { w: "bardak", m: "el vaso" }, { w: "anahtar", m: "la llave" }
         ],
         places: [
             { w: "okul", m: "la escuela" }, { w: "ev", m: "la casa" },
             { w: "iş", m: "el trabajo" }, { w: "park", m: "el parque" },
-            { w: "sokak", m: "la calle" }, { w: "hastane", m: "el hospital" }
+            { w: "sokak", m: "la calle" }, { w: "hastane", m: "el hospital" },
+            { w: "fırın", m: "la panadería" }, { w: "ofis", m: "la oficina" }
         ],
         people: [
             { w: "doktor", m: "médico/a" }, { w: "öğretmen", m: "profesor/a" },
-            { w: "mutlu", m: "feliz" }, { w: "yorgun", m: "cansado/a" }
+            { w: "avukat", m: "abogado/a" }, { w: "öğrenci", m: "estudiante" },
+            { w: "mutlu", m: "feliz" }, { w: "yorgun", m: "cansado/a" },
+            { w: "çalışkan", m: "trabajador/a" }, { w: "hasta", m: "enfermo/a" }
         ]
     },
 
     verbs: [
         { w: "ye", m: "comiendo", case: "acusativo", cat: "objects" },
         { w: "oku", m: "leyendo", case: "acusativo", cat: "objects" },
+        { w: "aç", m: "abriendo", case: "acusativo", cat: "objects" },
         { w: "git", m: "yendo", case: "dativo", cat: "places" },
         { w: "gel", m: "viniendo", case: "ablativo", cat: "places" },
-        { w: "otur", m: "viviendo/sentado", case: "locativo", cat: "places" }
+        { w: "otur", m: "sentado/a", case: "locativo", cat: "places" }
     ],
 
     generate() {
@@ -106,7 +112,7 @@ const game = {
 
             if (c.case === "acusativo") {
                 correct = (c.noun.w === "su" ? "yu" : (isV ? "y" : "") + h4);
-                opts = ["ı", "i", "u", "ü", "yı", "yi", "yu"];
+                opts = ["ı", "i", "u", "ü", "yı", "yi", "yu", "yü"];
             } else if (c.case === "dativo") {
                 correct = (isV ? "y" : "") + h2;
                 opts = ["a", "e", "ya", "ye"];
@@ -120,15 +126,13 @@ const game = {
             const root = (c.case === "acusativo" || c.case === "dativo") ? TR.applyKetcap(c.noun.w) : c.noun.w;
             sentenceText = `${root}<span class="gap">___</span> ${TR.conjugateVerb(c.verb.w, c.person)}.`;
         } else {
-            // NOMINAL
             const h4 = TR.getH4(c.noun.w);
             const isV = TR.vowels.includes(c.noun.w.slice(-1));
             if (c.type === "olumlu") {
                 const pSuf = { ben: "y?m", sen: "s?n", o: "", biz: "y?z", siz: "s?n?z" };
                 correct = pSuf[c.person].replace("?", h4);
                 if ((c.person === "ben" || c.person === "biz") && isV) correct = "y" + correct.slice(1);
-                if (c.person === "o") correct = ""; 
-                opts = ["um", "im", "sun", "sin", "uz", "iz", "yum", "yim", ""];
+                opts = ["um", "im", "sun", "sin", "uz", "iz", "yum", "yim", "sunuz", "siniz", ""];
                 sentenceText = `${c.noun.w}<span class="gap">___</span>.`;
             } else if (c.type === "olumsuz") {
                 const pSuf = { ben: "im", sen: "sin", o: "", biz: "iz", siz: "siniz" };
@@ -136,17 +140,18 @@ const game = {
                 opts = ["değilim", "değilsin", "değil", "değiliz", "değilsiniz"];
                 sentenceText = `${c.noun.w} <span class="gap">_______</span>.`;
             } else {
-                const m = "m" + h4;
+                const h4q = TR.getH4(c.noun.w);
+                const m = "m" + h4q;
                 const pSuf = { ben: "y?m", sen: "s?n", o: "", biz: "y?z", siz: "s?n?z" };
-                correct = m + (c.person === "o" ? "" : " " + pSuf[c.person].replace("?", h4));
-                opts = ["mıyım", "misin", "mi", "muyum", "mısınız", "miyiz"];
+                correct = m + (c.person === "o" ? "" : " " + pSuf[c.person].replace("?", h4q));
+                opts = ["mıyım", "misin", "mi", "muyum", "mısınız", "miyiz", "mı"];
                 sentenceText = `${c.noun.w} <span class="gap">_______</span>?`;
             }
         }
 
         display.innerHTML = sentenceText;
 
-        // Asegurar que la correcta esté y mezclar
+        // Limpiar opciones y asegurar que la correcta esté presente
         let finalOptions = [...new Set(opts)].filter(o => o !== correct).sort(() => 0.5 - Math.random()).slice(0, 3);
         finalOptions.push(correct);
         finalOptions.sort(() => 0.5 - Math.random());
@@ -154,7 +159,10 @@ const game = {
         finalOptions.forEach(suf => {
             const btn = document.createElement("button");
             btn.className = "opt";
-            btn.innerText = (suf === "" ? "(sin sufijo)" : (c.mode === "verb" || c.type === "olumlu" ? "-" + suf : suf));
+            // Formateo visual de los botones
+            let label = suf === "" ? "(sin sufijo)" : (c.mode === "verb" || c.type === "olumlu" ? "-" + suf : suf);
+            btn.innerText = label;
+
             btn.onclick = () => {
                 if (suf === correct) {
                     this.score += 10;
@@ -162,7 +170,11 @@ const game = {
                     this.init();
                 } else {
                     btn.style.borderColor = "red";
-                    setTimeout(() => btn.style.borderColor = "#eee", 400);
+                    btn.style.color = "red";
+                    setTimeout(() => {
+                        btn.style.borderColor = "#eee";
+                        btn.style.color = "black";
+                    }, 400);
                 }
             };
             grid.appendChild(btn);
@@ -171,21 +183,35 @@ const game = {
 
     showHint(type) {
         const c = this.curr;
-        const prons = { ben: "Yo", sen: "Tú", o: "Él/Ella", biz: "Nosotros/as", siz: "Vosotros/as" };
+        const pEsp = {
+            ben: { s: "Yo", v: "estoy", v2: "soy/estoy" },
+            sen: { s: "Tú", v: "estás", v2: "eres/estás" },
+            o: { s: "Él/Ella", v: "está", v2: "es/está" },
+            biz: { s: "Nosotros", v: "estamos", v2: "somos/estamos" },
+            siz: { s: "Vosotros", v: "estáis", v2: "sois/estáis" }
+        };
+
         if (type === 't') {
             let msg = "";
+            const pr = pEsp[c.person];
             if (c.mode === "verb") {
-                msg = `${prons[c.person]} estoy ${c.verb.m} ${c.noun.m}.`;
+                msg = `${pr.s} ${pr.v} ${c.verb.m} ${c.noun.m}.`;
             } else {
-                if (c.type === "olumlu") msg = `${prons[c.person]} soy/estoy ${c.noun.m}.`;
-                else if (c.type === "olumsuz") msg = `${prons[c.person]} no soy/estoy ${c.noun.m}.`;
-                else msg = `¿${prons[c.person]} soy/estoy ${c.noun.m}?`;
+                if (c.type === "olumlu") msg = `${pr.s} ${pr.v2} ${c.noun.m}.`;
+                else if (c.type === "olumsuz") msg = `${pr.s} no ${pr.v2} ${c.noun.m}.`;
+                else msg = `¿${pr.s} ${pr.v2} ${c.noun.m}?`;
             }
             document.getElementById("hint-display").innerText = msg;
         } else {
-            document.getElementById("rule-display").innerText = c.mode === "verb" ? `Caso ${c.case.toUpperCase()}` : "Oración Nominal";
+            const ruleMap = {
+                acusativo: "Objeto Directo (El/La)",
+                dativo: "Dirección (A/Hacia)",
+                locativo: "Estar en (En)",
+                ablativo: "Origen (De/Desde)"
+            };
+            document.getElementById("rule-display").innerText = c.mode === "verb" ? `Regla: ${ruleMap[c.case]}` : "Regla: Oración Nominal / Adjetivos";
         }
     }
 };
 
-game.init();
+window.onload = () => game.init();
