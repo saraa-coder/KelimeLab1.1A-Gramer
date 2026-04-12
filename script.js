@@ -187,7 +187,7 @@ const allWords = [
     {word:"Kapıda anahtar ___?",correct:"Var mı",translation:"¿Hay una llave en la puerta?"},
     {word:"Cebinde telefon ___?",correct:"Var mı",translation:"¿Hay un teléfono en el bolsillo?"},
     {word:"Bugün toplantı ___?",correct:"Var mı",translation:"¿Hay reunión hoy?"},
-    {word:"Evde televisión ___?",correct:"Var mı",translation:"¿Hay televisión en casa?"},
+    {word:"Evde televizyon ___?",correct:"Var mı",translation:"¿Hay televisión en casa?"},
     {word:"Sokakta insanlar ___?",correct:"Var mı",translation:"¿Hay gente en la calle?"},
     {word:"Okulda sınav ___?",correct:"Var mı",translation:"¿Hay examen en la escuela?"},
     {word:"Şehirde sorun ___?",correct:"Var mı",translation:"¿Hay problemas en la ciudad?"},
