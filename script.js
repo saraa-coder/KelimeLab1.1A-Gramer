@@ -1,5 +1,5 @@
 // =====================
-// 🧠 ESTADO GLOBAL
+// 🧠 STATE
 // =====================
 let quiz = [];
 let currentIndex = 0;
@@ -7,7 +7,7 @@ let score = 0;
 let muted = false;
 
 // =====================
-// 📦 QUIZ BASE (expandible a futuro)
+// 📦 BASE QUIZ
 // =====================
 const baseQuiz = [
   {
@@ -38,7 +38,7 @@ const baseQuiz = [
 ];
 
 // =====================
-// 🚀 START / CONTINUE
+// 🚀 START
 // =====================
 document.getElementById("startBtn").onclick = () => {
   quiz = shuffle([...baseQuiz]);
@@ -49,6 +49,9 @@ document.getElementById("startBtn").onclick = () => {
   loadQuestion();
 };
 
+// =====================
+// 🔁 CONTINUE
+// =====================
 document.getElementById("continueBtn").onclick = () => {
   const saved = JSON.parse(localStorage.getItem("kelimer_lab"));
 
@@ -58,7 +61,6 @@ document.getElementById("continueBtn").onclick = () => {
     score = saved.score;
   } else {
     quiz = shuffle([...baseQuiz]);
-    currentIndex = 0;
   }
 
   showGame();
@@ -66,7 +68,7 @@ document.getElementById("continueBtn").onclick = () => {
 };
 
 // =====================
-// 🏠 MENÜ
+// 🏠 MENU
 // =====================
 document.getElementById("menuBtn").onclick = () => {
   showHome();
@@ -135,7 +137,7 @@ function checkAnswer(selected, correct) {
 }
 
 // =====================
-// 💾 SAVE / LOAD
+// 💾 SAVE
 // =====================
 function saveProgress() {
   localStorage.setItem("kelimer_lab", JSON.stringify({
@@ -146,7 +148,7 @@ function saveProgress() {
 }
 
 // =====================
-// 🔊 TTS (Microsoft Emel si disponible)
+// 🔊 TTS
 // =====================
 function speak(text) {
   if (muted) return;
@@ -156,7 +158,6 @@ function speak(text) {
   utter.rate = 0.75;
 
   const voices = speechSynthesis.getVoices();
-
   const emel = voices.find(v => v.name.includes("Emel"));
   if (emel) utter.voice = emel;
 
@@ -172,7 +173,7 @@ function shuffle(arr) {
 }
 
 // =====================
-// 🟢 SCREEN CONTROL
+// 🖥️ SCREENS
 // =====================
 function showGame() {
   document.getElementById("home").classList.remove("active");
