@@ -1,4 +1,4 @@
-// 1. BASE DE DATOS
+ // 1. BASE DE DATOS
 const allWords = [
 {word:"Bu sen ___?",correct:"misin",translation:"¿Eres tú?"},
 {word:"O öğrenci ___?",correct:"mi",translation:"¿Es estudiante?"},
@@ -17,7 +17,6 @@ const allWords = [
 {word:"Türkçe öğreniyor ___?",correct:"musun",translation:"¿Estás aprendiendo turco?"},
 
 // VAR / YOK
-
 {word:"Evde süt ___?",correct:"var mı",translation:"¿Hay leche en casa?"},
 {word:"Buzdolabında ekmek ___?",correct:"var mı",translation:"¿Hay pan en el frigorífico?"},
 {word:"Masada kitap ___?",correct:"var mı",translation:"¿Hay un libro en la mesa?"},
@@ -72,7 +71,6 @@ const allWords = [
 {word:"Buzdolabında süt ___?",correct:"yok mu",translation:"¿No hay leche en la nevera?"},
 
 // CASOS + ŞİMDİKİ ZAMAN
-
 {word:"Kitabı masa___ koyuyorum",correct:"ya",translation:"Pongo el libro en la mesa"},
 {word:"Suyu bardak___ koyuyorum",correct:"a",translation:"Pongo el agua en el vaso"},
 {word:"Arabayı garaj___ park ediyorum",correct:"a",translation:"Aparco el coche en el garaje"},
@@ -83,49 +81,41 @@ const allWords = [
 {word:"Sütü buzdolabın___ çıkarıyorum",correct:"dan",translation:"Saco la leche de la nevera"},
 {word:"Defteri çanta___ koyuyorum",correct:"ya",translation:"Pongo el cuaderno en la mochila"},
 {word:"Kapı___ açıyorum",correct:"yı",translation:"Abro la puerta"},
-
 {word:"Elma___ yiyorum",correct:"yı",translation:"Como la manzana"},
 {word:"Mektup___ yazıyorum",correct:"u",translation:"Escribo la carta"},
 {word:"Kitap___ okuyorum",correct:"ı",translation:"Leo el libro"},
 {word:"Bardak___ su içiyorum",correct:"tan",translation:"Bebo agua del vaso"},
 {word:"Çanta___ para alıyorum",correct:"dan",translation:"Cojo dinero de la mochila"},
-
 {word:"Otobüs___ biniyorum",correct:"e",translation:"Subo al autobús"},
 {word:"Tren___ iniyorum",correct:"den",translation:"Bajo del tren"},
 {word:"Eve giriyorum kapı___",correct:"dan",translation:"Entro por la puerta"},
 {word:"Bahçe___ çıkıyorum",correct:"den",translation:"Salgo del jardín"},
 {word:"Telefon___ bakıyorum",correct:"a",translation:"Miro el teléfono"},
-
 {word:"Su___ içiyorum",correct:"yu",translation:"Bebo agua"},
 {word:"Kahve___ içiyorum",correct:"yi",translation:"Bebo café"},
 {word:"Çay___ içiyorum",correct:"ı",translation:"Bebo té"},
 {word:"Meyve___ yiyorum",correct:"yi",translation:"Como fruta"},
 {word:"Ekmek___ yiyorum",correct:"i",translation:"Como pan"},
-
 {word:"Araba___ kullanıyorum",correct:"yı",translation:"Conduzco el coche"},
 {word:"Bisiklet___ sürüyorum",correct:"i",translation:"Monto en bici"},
 {word:"Müzik___ dinliyorum",correct:"i",translation:"Escucho música"},
 {word:"Film___ izliyorum",correct:"i",translation:"Veo una película"},
 {word:"Televizyon___ açıyorum",correct:"u",translation:"Enciendo la tele"},
-
 {word:"Kapı___ kapatıyorum",correct:"yı",translation:"Cierro la puerta"},
 {word:"Pencere___ açıyorum",correct:"yi",translation:"Abro la ventana"},
 {word:"Işık___ açıyorum",correct:"ı",translation:"Enciendo la luz"},
 {word:"Işık___ kapatıyorum",correct:"ı",translation:"Apago la luz"},
 {word:"Telefon___ kullanıyorum",correct:"u",translation:"Uso el teléfono"},
-
 {word:"Mesaj___ yazıyorum",correct:"ı",translation:"Escribo un mensaje"},
 {word:"Arkadaş___ arıyorum",correct:"ı",translation:"Llamo al amigo"},
 {word:"E-posta___ gönderiyorum",correct:"yı",translation:"Envio un email"},
 {word:"Para___ harcıyorum",correct:"yı",translation:"Gasto dinero"},
 {word:"Alışveriş___ yapıyorum",correct:"yı",translation:"Hago compras"},
-
 {word:"Ev___ giriyorum",correct:"e",translation:"Entro en casa"},
 {word:"Dışarı___ çıkıyorum",correct:"ya",translation:"Salgo fuera"},
 {word:"Okul___ koşuyorum",correct:"a",translation:"Corro a la escuela"},
 {word:"Park___ gidiyorum",correct:"a",translation:"Voy al parque"},
 {word:"Deniz___ yüzüyorum",correct:"de",translation:"Nado en el mar"},
-
 {word:"Su___ dolduruyorum",correct:"yu",translation:"Lleno agua"},
 {word:"Çanta___ açıyorum",correct:"yı",translation:"Abro la mochila"},
 {word:"Defter___ kapatıyorum",correct:"i",translation:"Cierro el cuaderno"},
