@@ -1,42 +1,55 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kelimer Lab 1.1A Gramer</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelime Lab 1.1A</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- 🟣 HOME -->
-  <div id="home" class="screen active">
-    <h1>Kelimer Lab 1.1A Gramer</h1>
+    <div id="start-screen">
+        <h1>Kelime Lab 1.1A</h1>
+        
+        <div id="mode-selector">
+            <button onclick="setMode('tr-es', event)" class="primary-btn" style="background-color: #10b981;">
+                Türkçe ➔ Español
+            </button>
+            <button onclick="setMode('es-tr', event)" class="primary-btn" style="background-color: #f59e0b;">
+                Español ➔ Türkçe
+            </button>
+            <button onclick="setMode('mixed', event)" class="primary-btn" style="background-color: #ec4899;">
+                Karışık
+            </button>
+        </div>
 
-    <button id="startBtn">Başla</button>
-    <button id="continueBtn">Devam et</button>
+        <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.1); width: 100%;">
 
-    <div class="audio-controls">
-      <button id="muteBtn">🔊 Audio ON</button>
+        <div id="action-buttons">
+            <button id="start-button" onclick="resetAndStart()" class="primary-btn" style="background-color: #3949ab;">
+                YENİ OYUN
+            </button>
+            <button id="resume-button" onclick="startGame()" class="primary-btn" style="display: none; background-color: #5c6bc0;">
+                DEVAM ET
+            </button>
+        </div>
     </div>
-  </div>
 
-  <!-- 🎮 GAME -->
-  <div id="game" class="screen">
+    <div id="game-container" style="display: none;">
+        <div class="stats-bar">
+            <button onclick="showMenu()" class="menu-btn">MENÜ</button>
+            
+            <div class="stats-info">
+                <span id="score">0 tamamlanan</span>
+                <span id="percent">%0</span>
+            </div>
+        </div>
 
-    <div class="top-bar">
-      <button id="menuBtn">Menü</button>
-      <button id="muteBtnGame">🔊</button>
+        <div id="dots"></div>
+        <div id="word">Yükleniyor...</div>
+        <div id="options"></div>
     </div>
 
-    <div id="questionBox"></div>
-
-    <div id="options"></div>
-
-    <div id="feedback"></div>
-
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
