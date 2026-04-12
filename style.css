@@ -35,32 +35,33 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 !important;
-    line-height: 1;
+    line-height: 1.1;
     font-weight: 800;
     text-align: center;
 }
 
-/* Título Kelime Lab */
+/* Título Kelime Lab - Rojo suavizado */
 .main-title span:first-child {
     font-size: 4rem;
-    background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
+    background: linear-gradient(180deg, #ff8a80 10%, #c62828 90%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
 }
 
-/* Título Gramer */
+/* Título Gramer - Más sutil */
 .main-title span:last-child {
     font-size: 3rem;
-    background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
+    background: linear-gradient(180deg, #ff8a80 10%, #c62828 90%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
+/* Círculo 1.1A - Rojo elegante */
 .version-badge {
-    background: linear-gradient(180deg, #ff0000 0%, #990000 100%) !important;
+    background: linear-gradient(180deg, #d32f2f 0%, #8e0000 100%) !important;
     color: white !important;
     font-weight: 900;
     border-radius: 50%;
@@ -69,7 +70,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     font-size: 1.8rem;
     margin-top: 10px;
 }
@@ -175,7 +176,7 @@ body {
     
     .option {
         font-size: 5.5vw !important; 
-        padding: 12px 10px !important;
+        padding: 10px 10px !important; /* Altura más fina */
     }
     .options-grid { gap: 6px; }
 }
