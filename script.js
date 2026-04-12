@@ -1,243 +1,247 @@
 // =====================
-// 🧠 STATE GLOBAL
+// 🧠 STATE
 // =====================
-let quiz = [];
-let currentIndex = 0;
+let currentQuestion = null;
 let score = 0;
 let muted = false;
+let history = [];
 
 // =====================
-// 📦 POOL MULTI-NIVEL (A1 MIX)
+// 📦 VOCABULARIO BASE
 // =====================
-const baseQuiz = [
-  // 📦 VAR / YOK
-  {
-    sentence: "Buzdolabında süt ___.",
-    answer: "var",
-    options: ["var", "evet", "tamam", "şimdi"],
-    fullCorrect: "Buzdolabında süt var."
-  },
-  {
-    sentence: "Valizde telefon ___.",
-    answer: "yok",
-    options: ["yok", "evet", "tamam", "şimdi"],
-    fullCorrect: "Valizde telefon yok."
-  },
+const places = ["ev", "okul", "banka", "park", "ofis", "market", "oda"];
+const objects = ["kitap", "telefon", "süt", "su", "kalem", "bilgisayar", "peynir"];
 
-  // ❓ SORU EKİ
-  {
-    sentence: "Hava güzel ___.?",
-    answer: "mi",
-    options: ["mi", "mı", "mu", "mü"],
-    fullCorrect: "Hava güzel mi?"
-  },
-  {
-    sentence: "Sen mutlu ___.?",
-    answer: "musun",
-    options: ["musun", "müsün", "misin", "mısın"],
-    fullCorrect: "Sen mutlu musun?"
-  },
+// =====================
+// 🔁 UTILIDADES
+// =====================
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
-  // 📍 CASO (dativo / acusativo básico)
-  {
-    sentence: "Okul__ gidiyorum.",
-    answer: "a",
-    options: ["a", "e", "da", "den"],
-    fullCorrect: "Okula gidiyorum."
-  },
-  {
-    sentence: "Kitab__ okuyorum.",
-    answer: "ı",
-    options: ["ı", "i", "u", "ü"],
-    fullCorrect: "Kitabı okuyorum."
-  },
+function shuffle(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}
 
-  // 📍 LOCATIVO / ABLATIVO
-  {
-    sentence: "Ev__yim.",
-    answer: "de",
-    options: ["de", "da", "te", "ta"],
-    fullCorrect: "Evdeyim."
-  },
-  {
-    sentence: "Okul__ geliyorum.",
-    answer: "dan",
-    options: ["dan", "den", "tan", "ten"],
-    fullCorrect: "Okuldan geliyorum."
+// =====================
+// 🧠 ARMONÍA VOCÁLICA
+// =====================
+function lastVowel(word) {
+  return word.match(/[aeıioöuü]/gi)?.pop();
+}
+
+function getSuffix(type, word) {
+  const v = lastVowel(word);
+
+  const back = ["a", "ı", "o", "u"];
+  const front = ["e", "i", "ö", "ü"];
+
+  const isBack = back.includes(v);
+
+  switch (type) {
+    case "dative": return isBack ? "a" : "e";
+    case "locative": return isBack ? "da" : "de";
+    case "ablative": return isBack ? "dan" : "den";
+    case "accusative": return isBack ? "ı" : "i";
   }
-];
+}
 
 // =====================
-// 🚀 START
+// 🧱 MUTACIÓN CONSONÁNTICA
 // =====================
-document.getElementById("startBtn").onclick = () => {
-  quiz = shuffle([...baseQuiz]);
-  currentIndex = 0;
-  score = 0;
+function consonantFix(word) {
+  const last = word[word.length - 1];
 
-  saveProgress();
-  showGame();
-  loadQuestion();
-};
+  const map = {
+    "p": "b",
+    "ç": "c",
+    "t": "d",
+    "k": "ğ"
+  };
 
-// =====================
-// 🔁 CONTINUE
-// =====================
-document.getElementById("continueBtn").onclick = () => {
-  const saved = JSON.parse(localStorage.getItem("kelimer_lab"));
-
-  if (saved && saved.quiz) {
-    quiz = saved.quiz;
-    currentIndex = saved.index;
-    score = saved.score;
-  } else {
-    quiz = shuffle([...baseQuiz]);
-    currentIndex = 0;
-    score = 0;
+  if (map[last]) {
+    return word.slice(0, -1) + map[last];
   }
 
-  showGame();
-  loadQuestion();
-};
+  return word;
+}
 
 // =====================
-// 🏠 MENU
+// 🧩 GENERADOR VAR / YOK
 // =====================
-document.getElementById("menuBtn").onclick = () => {
-  showHome();
-};
+function genVarYok() {
+  const place = random(places);
+  const object = random(objects);
+
+  const answer = Math.random() > 0.5 ? "var" : "yok";
+
+  return {
+    type: "varYok",
+    sentence: `${place} ${object} ___.`,
+    answer,
+    options: shuffle(["var", "yok", "evet", "tamam"]),
+    full: `${place} ${object} ${answer}.`
+  };
+}
 
 // =====================
-// 🔇 AUDIO TOGGLE
+// ❓ SORU EKİ
 // =====================
-document.getElementById("muteBtn").onclick =
-document.getElementById("muteBtnGame").onclick = () => {
-  muted = !muted;
-  updateMuteUI();
-};
+function genSoru() {
+  const adj = random(["güzel", "büyük", "küçük", "yeni"]);
 
-function updateMuteUI() {
-  const text = muted ? "🔇 Audio OFF" : "🔊 Audio ON";
-  document.getElementById("muteBtn").innerText = text;
-  document.getElementById("muteBtnGame").innerText = muted ? "🔇" : "🔊";
+  const particle = (() => {
+    const v = lastVowel(adj);
+    if (["e", "i"].includes(v)) return "mi";
+    if (["a", "ı"].includes(v)) return "mı";
+    if (["o", "u"].includes(v)) return "mu";
+    return "mü";
+  })();
+
+  return {
+    type: "soru",
+    sentence: `Bu ${adj} ___.?`,
+    answer: particle,
+    options: shuffle(["mi", "mı", "mu", "mü"]),
+    full: `Bu ${adj} ${particle}?`
+  };
+}
+
+// =====================
+// 📍 CASOS
+// =====================
+function genCase() {
+  const place = random(places);
+  const object = consonantFix(random(objects));
+
+  const types = ["dative", "accusative", "locative", "ablative"];
+  const type = random(types);
+
+  const suffix = getSuffix(type, place);
+
+  let sentence = "";
+
+  switch (type) {
+    case "dative":
+      sentence = `${place}__ gidiyorum.`;
+      break;
+    case "accusative":
+      sentence = `${object}__ görüyorum.`;
+      break;
+    case "locative":
+      sentence = `${place}__yim.`;
+      break;
+    case "ablative":
+      sentence = `${place}__ geliyorum.`;
+      break;
+  }
+
+  return {
+    type: "case",
+    sentence,
+    answer: suffix,
+    options: shuffle(["a", "e", "ı", "i", "da", "de", "dan", "den"]),
+    full:
+      type === "dative" ? `${place}${suffix}` :
+      type === "accusative" ? `${object}${suffix}` :
+      type === "locative" ? `${place}${suffix}` :
+      `${place}${suffix}`
+  };
+}
+
+// =====================
+// 🎲 GENERADOR PRINCIPAL
+// =====================
+function generateQuestion() {
+  const types = ["varYok", "soru", "case"];
+  const type = random(types);
+
+  let q;
+
+  if (type === "varYok") q = genVarYok();
+  if (type === "soru") q = genSoru();
+  if (type === "case") q = genCase();
+
+  // anti repetición simple
+  if (history.includes(q.sentence)) {
+    return generateQuestion();
+  }
+
+  history.push(q.sentence);
+  if (history.length > 20) history.shift();
+
+  return q;
 }
 
 // =====================
 // 🎮 LOAD QUESTION
 // =====================
 function loadQuestion() {
-  const q = quiz[currentIndex];
+  currentQuestion = generateQuestion();
 
-  if (!q) return;
+  document.getElementById("questionBox").innerText =
+    currentQuestion.sentence;
 
-  document.getElementById("questionBox").innerText = q.sentence;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
 
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-
-  shuffle(q.options).forEach(opt => {
+  currentQuestion.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.innerText = opt;
 
-    btn.onclick = () => checkAnswer(opt, q);
+    btn.onclick = () => checkAnswer(opt);
 
-    optionsDiv.appendChild(btn);
+    box.appendChild(btn);
   });
 }
 
 // =====================
-// 🎯 CHECK ANSWER (INFINITO + VISUAL)
+// 🎯 CHECK ANSWER
 // =====================
-function checkAnswer(selected, q) {
+function checkAnswer(selected) {
+  const q = currentQuestion;
   const buttons = document.querySelectorAll("#options button");
 
-  const correct = q.answer;
-  const isCorrect = selected === correct;
+  const isCorrect = selected === q.answer;
 
   buttons.forEach(btn => {
     btn.disabled = true;
 
-    const value = btn.innerText;
-
-    // 🟢 correcta
-    if (value === correct) {
+    if (btn.innerText === q.answer) {
       btn.style.background = "#22c55e";
     }
 
-    // 🔴 incorrecta seleccionada
-    if (value === selected && !isCorrect) {
+    if (btn.innerText === selected && !isCorrect) {
       btn.style.background = "#ef4444";
     }
   });
 
   if (isCorrect) score++;
 
-  const correctSentence =
-    q.fullCorrect || q.sentence.replace("___", correct);
-
-  speak(correctSentence);
-
-  currentIndex++;
-  saveProgress();
+  speak(q.full);
 
   setTimeout(() => {
-    // 🔁 INFINITO REAL
-    if (currentIndex >= quiz.length) {
-      quiz = shuffle([...baseQuiz]);
-      currentIndex = 0;
-    }
-
     loadQuestion();
   }, 900);
 }
 
 // =====================
-// 💾 SAVE PROGRESS
-// =====================
-function saveProgress() {
-  localStorage.setItem("kelimer_lab", JSON.stringify({
-    quiz,
-    index: currentIndex,
-    score
-  }));
-}
-
-// =====================
-// 🔊 TEXT TO SPEECH
+// 🔊 TTS
 // =====================
 function speak(text) {
   if (muted) return;
 
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "tr-TR";
-  utter.rate = 0.75;
-
-  const voices = speechSynthesis.getVoices();
-  const emel = voices.find(v => v.name.includes("Emel"));
-
-  if (emel) utter.voice = emel;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "tr-TR";
+  u.rate = 0.75;
 
   speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
+  speechSynthesis.speak(u);
 }
 
 // =====================
-// 🎲 UTIL
+// 🟢 START
 // =====================
-function shuffle(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
-
-// =====================
-// 🖥️ SCREENS
-// =====================
-function showGame() {
-  document.getElementById("home").classList.remove("active");
-  document.getElementById("game").classList.add("active");
-}
-
-function showHome() {
-  document.getElementById("game").classList.remove("active");
-  document.getElementById("home").classList.add("active");
-  document.getElementById("feedback").innerText = "";
-}
+window.onload = () => {
+  loadQuestion();
+};
