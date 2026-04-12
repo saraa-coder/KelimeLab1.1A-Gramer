@@ -555,11 +555,28 @@ function loadQuestion() {
     const wordElement = document.getElementById("word");
     const optionsContainer = document.getElementById("options");
     
+    // Mostramos la frase en turco
     wordElement.textContent = current.word;
-    wordElement.classList.remove("word-mastered"); 
+    
+    // --- AQUÍ AÑADIMOS LA TRADUCCIÓN ---
+    // Creamos un elemento pequeño para la traducción si no existe, o lo actualizamos
+    let transElement = document.getElementById("translation");
+    if (!transElement) {
+        transElement = document.createElement("div");
+        transElement.id = "translation";
+        // Estilo directamente aquí para que sea más pequeña y grisácea
+        transElement.style.fontSize = "1.2rem"; 
+        transElement.style.color = "#666";
+        transElement.style.marginTop = "10px";
+        transElement.style.fontWeight = "400";
+        wordElement.parentNode.insertBefore(transElement, document.getElementById("dots"));
+    }
+    transElement.textContent = current.translation;
+    // -----------------------------------
+
     optionsContainer.innerHTML = "";
 
-    // Generar opciones (la correcta + 3 aleatorias)
+    // Generar opciones
     let opts = new Set([current.correct]);
     while(opts.size < 4) {
         let randomWord = allWords[Math.floor(Math.random() * allWords.length)];
@@ -576,7 +593,6 @@ function loadQuestion() {
         optionsContainer.appendChild(btn);
     });
 }
-
 function handleAnswer(opt, btn) {
     if (locked) return;
     locked = true;
