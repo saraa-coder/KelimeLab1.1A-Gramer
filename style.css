@@ -110,6 +110,24 @@ body {
 #translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
 
 .options-grid { display: grid; gap: 12px; }
-.option { background: white; padding: 18px; border-radius: 15px; font-size: 1.1rem; border: 2px solid transparent; cursor: pointer; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-.correct { background-color: var(--accent) !important; color: white !important; }
-.wrong { background-color: #ff5252 !important; color: white !important; }
+.option { 
+    background: white; 
+    padding: 18px; 
+    border-radius: 15px; 
+    font-size: 1.1rem; 
+    border: 2px solid transparent; 
+    cursor: pointer; 
+    font-weight: 600; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    text-transform: lowercase; /* <--- Esto hace que Var sea var */
+}
+
+.correct { 
+    background-color: var(--accent) !important; 
+    color: white !important; 
+}
+
+.wrong { 
+    background-color: #ff5252 !important; 
+    color: white !important; 
+}
