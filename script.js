@@ -75,7 +75,81 @@ const allWords = [
 {word:"O mutlu ___",correct:"değil",translation:"No es feliz"},
 {word:"Biz mutlu değil ___",correct:"iz",translation:"No somos felices"},
 {word:"Siz mutlu değil ___",correct:"siniz",translation:"No sois felices"},
-{word:"Onlar mutlu ___",correct:"değil",translation:"No son felices"}
+{word:"Onlar mutlu ___",correct:"değil",translation:"No son felices"},
+
+// EK-FIIL OLUMLU SORU
+
+// BEN
+{word:"Ben mühendis ___?",correct:"miyim",translation:"¿Soy ingeniero?"},
+{word:"Ben cerrah ___?",correct:"mıyım",translation:"¿Soy cirujano?"},
+{word:"Ben pilot ___?",correct:"muyum",translation:"¿Soy piloto?"},
+{word:"Ben avukat ___?",correct:"mıyım",translation:"¿Soy abogado?"},
+{word:"Ben mimar ___?",correct:"mıyım",translation:"¿Soy arquitecto?"},
+{word:"Ben psikolog ___?",correct:"muyum",translation:"¿Soy psicólogo?"},
+{word:"Ben şef ___?",correct:"miyim",translation:"¿Soy chef?"},
+{word:"Ben programcı ___?",correct:"mıyım",translation:"¿Soy programador?"},
+{word:"Ben gazeteci ___?",correct:"miyim",translation:"¿Soy periodista?"},
+{word:"Ben fotoğrafçı ___?",correct:"mıyım",translation:"¿Soy fotógrafo?"},
+
+// SEN
+{word:"Sen itfaiyeci ___?",correct:"misin",translation:"¿Eres bombero?"},
+{word:"Sen dişçi ___?",correct:"misin",translation:"¿Eres dentista?"},
+{word:"Sen mühendis ___?",correct:"misin",translation:"¿Eres ingeniero?"},
+{word:"Sen pilot ___?",correct:"musun",translation:"¿Eres piloto?"},
+{word:"Sen aşçı ___?",correct:"mısın",translation:"¿Eres cocinero?"},
+{word:"Sen hemşire ___?",correct:"misin",translation:"¿Eres enfermero?"},
+{word:"Sen sporcu ___?",correct:"musun",translation:"¿Eres deportista?"},
+{word:"Sen yorgun ___?",correct:"musun",translation:"¿Estás cansado?"},
+{word:"Sen sakin ___?",correct:"misin",translation:"¿Estás tranquilo?"},
+{word:"Sen heyecanlı ___?",correct:"mısın",translation:"¿Estás emocionado?"},
+
+// O
+{word:"O kaptan ___?",correct:"mı",translation:"¿Es capitán?"},
+{word:"O terzi ___?",correct:"mi",translation:"¿Es sastre?"},
+{word:"O marangoz ___?",correct:"mu",translation:"¿Es carpintero?"},
+{word:"O müzisyen ___?",correct:"mi",translation:"¿Es músico?"},
+{word:"O ressam ___?",correct:"mı",translation:"¿Es pintor?"},
+{word:"O atlet ___?",correct:"mi",translation:"¿Es atleta?"},
+{word:"O rehber ___?",correct:"mi",translation:"¿Es guía?"},
+{word:"O kasap ___?",correct:"mı",translation:"¿Es carnicero?"},
+{word:"O çevirmen ___?",correct:"mi",translation:"¿Es traductor?"},
+{word:"O şoför ___?",correct:"mü",translation:"¿Es conductor?"},
+
+// BİZ
+{word:"Biz mimar ___?",correct:"mıyız",translation:"¿Somos arquitectos?"},
+{word:"Biz doktor ___?",correct:"muyuz",translation:"¿Somos médicos?"},
+{word:"Biz avukat ___?",correct:"mıyız",translation:"¿Somos abogados?"},
+{word:"Biz öğretmen ___?",correct:"miyiz",translation:"¿Somos profesores?"},
+{word:"Biz mühendis ___?",correct:"miyiz",translation:"¿Somos ingenieros?"},
+{word:"Biz pilot ___?",correct:"muyuz",translation:"¿Somos pilotos?"},
+{word:"Biz sporcu ___?",correct:"muyuz",translation:"¿Somos deportistas?"},
+{word:"Biz sakin ___?",correct:"miyiz",translation:"¿Estamos tranquilos?"},
+{word:"Biz mutlu ___?",correct:"muyuz",translation:"¿Estamos felices?"},
+{word:"Biz hazır ___?",correct:"mıyız",translation:"¿Estamos listos?"},
+
+// SİZ
+{word:"Siz diplomat ___?",correct:"mısınız",translation:"¿Sois diplomáticos?"},
+{word:"Siz akademisyen ___?",correct:"misiniz",translation:"¿Sois académicos?"},
+{word:"Siz girişimci ___?",correct:"misiniz",translation:"¿Sois emprendedores?"},
+{word:"Siz editör ___?",correct:"müsünüz",translation:"¿Sois editores?"},
+{word:"Siz tasarımcı ___?",correct:"mısınız",translation:"¿Sois diseñadores?"},
+{word:"Siz danışman ___?",correct:"mısınız",translation:"¿Sois consultores?"},
+{word:"Siz teknisyen ___?",correct:"misiniz",translation:"¿Sois técnicos?"},
+{word:"Siz organize ___?",correct:"misiniz",translation:"¿Sois organizados?"},
+{word:"Siz dikkatli ___?",correct:"misiniz",translation:"¿Sois cuidadosos?"},
+{word:"Siz enerjik ___?",correct:"misiniz",translation:"¿Sois enérgicos?"},
+
+// ONLAR
+{word:"Onlar kaptan ___?",correct:"mı",translation:"¿Son capitanes?"},
+{word:"Onlar ressam ___?",correct:"mı",translation:"¿Son pintores?"},
+{word:"Onlar müzisyen ___?",correct:"mi",translation:"¿Son músicos?"},
+{word:"Onlar pilot ___?",correct:"mu",translation:"¿Son pilotos?"},
+{word:"Onlar şoför ___?",correct:"mü",translation:"¿Son conductores?"},
+{word:"Onlar çevirmen ___?",correct:"mi",translation:"¿Son traductores?"},
+{word:"Onlar atlet ___?",correct:"mi",translation:"¿Son atletas?"},
+{word:"Onlar kasap ___?",correct:"mı",translation:"¿Son carniceros?"},
+{word:"Onlar rehber ___?",correct:"mi",translation:"¿Son guías?"},
+{word:"Onlar marangoz ___?",correct:"mu",translation:"¿Son carpinteros?"}
 ];
 
 
