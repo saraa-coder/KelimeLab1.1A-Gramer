@@ -1,13 +1,89 @@
-:root { --primary: #008751; --bg: #f0f2f5; }
-body { font-family: sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-#game-card { background: white; width: 92%; max-width: 400px; padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-.top-bar { display: flex; justify-content: space-between; margin-bottom: 20px; }
-.icon-btn { cursor: pointer; background: #eee; padding: 8px; border-radius: 50%; font-size: 1.2rem; user-select: none; }
-#question-area { text-align: center; min-height: 140px; }
-h1 { font-size: 1.4rem; margin: 10px 0; line-height: 1.4; }
-#hint-display { color: #666; font-style: italic; height: 20px; margin-bottom: 5px; }
-#rule-display { color: var(--primary); font-weight: bold; height: 20px; font-size: 0.85rem; }
-#options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-button.opt { padding: 15px; border: 2px solid #eee; background: white; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; }
-button.opt:active { background: #e8f5e9; border-color: var(--primary); }
-.gap { color: var(--primary); border-bottom: 2px solid var(--primary); }
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.screen {
+  display: none;
+  padding: 40px;
+}
+
+.screen.active {
+  display: block;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* PORTADA */
+#startBtn {
+  background: #22c55e;
+  color: white;
+}
+
+#continueBtn {
+  background: #3b82f6;
+  color: white;
+}
+
+/* TOP BAR */
+.top-bar {
+  position: relative;
+  height: 40px;
+}
+
+#menuBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #64748b;
+  color: white;
+}
+
+#muteBtnGame {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: #334155;
+  color: white;
+}
+
+/* JUEGO */
+#questionBox {
+  font-size: 24px;
+  margin: 40px 0;
+}
+
+#options button {
+  display: block;
+  width: 220px;
+  margin: 10px auto;
+  background: #1e293b;
+  color: white;
+}
+
+#feedback {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.audio-controls {
+  margin-top: 20px;
+}
