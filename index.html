@@ -3,51 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelime Lab 1.1A</title>
+    <title>Kelime Lab - Aprende Turco</title>
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Ajuste para PC: Grosor limpio a 695 */
+        .main-title span {
+            font-weight: 695 !important; 
+        }
+
+        /* Ajustes específicos para móviles */
+        @media screen and (max-width: 768px) {
+            body, button, .primary-btn, #word, .stats {
+                font-weight: 700 !important;
+            }
+
+            .main-title {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin: 0 !important;
+            }
+
+            .main-title span {
+                /* DEGRADADO NOTABLE: Rosa pastel a Rojo intenso */
+                background: linear-gradient(180deg, #ffcdd2 5%, #b71c1c 85%) !important;
+                -webkit-background-clip: text !important;
+                background-clip: text !important;
+                
+                font-weight: 900 !important; 
+                font-size: 14vw !important; 
+                letter-spacing: -0.04em !important; 
+                display: inline-block !important;
+                line-height: 1.1 !important;
+                white-space: nowrap !important;
+                -webkit-text-stroke: 1px transparent;
+                padding-right: 0.15em !important; 
+                margin-right: -0.15em !important; 
+            }
+
+            /* Círculo centrado debajo */
+            #start-screen div[style*="display: flex"] {
+                flex-direction: column !important;
+                align-items: center !important; 
+            }
+
+            #start-screen div[style*="background: linear-gradient"] {
+                width: 55px !important;
+                height: 55px !important;
+                font-size: 1.4rem !important;
+                margin-left: 0 !important; 
+                margin-top: 5px !important; 
+                font-weight: 900 !important;
+            }
+
+            .options-grid button {
+                font-weight: 800 !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div id="start-screen">
-        <h1>Kelime Lab 1.1A</h1>
+    <div id="start-screen" class="screen-content">
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            
+            <h1 class="main-title" style="display: inline-block; margin: 0; line-height: 1;">
+                <span style="background: linear-gradient(180deg, #ffcdd2 5%, #b71c1c 85%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelime Lab</span>
+            </h1>
+
+            <div style="
+                background: linear-gradient(180deg, #ff0000 0%, #990000 100%);
+                color: white;
+                font-family: inherit;
+                font-size: 2rem;
+                font-weight: 900;
+                border-radius: 50%;
+                width: 75px;
+                height: 75px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+                flex-shrink: 0;
+                margin-left: 25px;
+                line-height: 1;
+            ">
+                1.1A
+            </div>
+        </div>
         
-        <div id="mode-selector">
-            <button onclick="setMode('tr-es', event)" class="primary-btn" style="background-color: #10b981;">
-                Türkçe ➔ Español
-            </button>
-            <button onclick="setMode('es-tr', event)" class="primary-btn" style="background-color: #f59e0b;">
-                Español ➔ Türkçe
-            </button>
-            <button onclick="setMode('mixed', event)" class="primary-btn" style="background-color: #ec4899;">
-                Karışık
-            </button>
-        </div>
-
-        <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.1); width: 100%;">
-
-        <div id="action-buttons">
-            <button id="start-button" onclick="resetAndStart()" class="primary-btn" style="background-color: #3949ab;">
-                YENİ OYUN
-            </button>
-            <button id="resume-button" onclick="startGame()" class="primary-btn" style="display: none; background-color: #5c6bc0;">
-                DEVAM ET
-            </button>
-        </div>
+        <button id="start-button" onclick="resetAndStart()" class="primary-btn" style="margin-top: 50px; background-color: #3949ab; color: #ffffff; border: none; cursor: pointer;">
+            BAŞLA
+        </button>
+        
+        <button id="resume-button" onclick="startGame()" class="primary-btn" style="margin-top: 20px; display: none; background-color: #3949ab; color: #ffffff; border: none; cursor: pointer;">
+            DEVAM ET
+        </button>
     </div>
 
-    <div id="game-container" style="display: none;">
-        <div class="stats-bar">
-            <button onclick="showMenu()" class="menu-btn">MENÜ</button>
-            
-            <div class="stats-info">
+    <div id="game-container">
+        <div class="topbar">
+            <div class="stats">
                 <span id="score">0 tamamlanan</span>
                 <span id="percent">%0</span>
             </div>
+            <button class="stats" onclick="location.reload()">Menü</button>
         </div>
-
-        <div id="dots"></div>
-        <div id="word">Yükleniyor...</div>
-        <div id="options"></div>
+        <div class="card">
+            <h1 id="word">Cargando...</h1>
+            <div id="dots"></div>
+        </div>
+        <div id="options" class="options-grid"></div>
     </div>
 
     <script src="script.js"></script>
