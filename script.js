@@ -1,5 +1,5 @@
 // =====================
-// 🧠 STATE
+// 🧠 STATE GLOBAL
 // =====================
 let quiz = [];
 let currentIndex = 0;
@@ -7,11 +7,12 @@ let score = 0;
 let muted = false;
 
 // =====================
-// 📦 QUIZ BASE (SIN AMBIGÜEDADES)
+// 📦 POOL MULTI-NIVEL (A1 MIX)
 // =====================
 const baseQuiz = [
+  // 📦 VAR / YOK
   {
-    sentence: "Buzdolabında süt ___",
+    sentence: "Buzdolabında süt ___.",
     answer: "var",
     options: ["var", "evet", "tamam", "şimdi"],
     fullCorrect: "Buzdolabında süt var."
@@ -22,25 +23,47 @@ const baseQuiz = [
     options: ["yok", "evet", "tamam", "şimdi"],
     fullCorrect: "Valizde telefon yok."
   },
-  {
-    sentence: "Evde internet ___.",
-    answer: "yok",
-    options: ["yok", "evet", "tamam", "şimdi"],
-    fullCorrect: "Evde internet yok."
-  },
 
   // ❓ SORU EKİ
   {
-    sentence: "Hava güzel ___?",
+    sentence: "Hava güzel ___.?",
     answer: "mi",
     options: ["mi", "mı", "mu", "mü"],
     fullCorrect: "Hava güzel mi?"
   },
   {
-    sentence: "Sen mutlu ___?",
+    sentence: "Sen mutlu ___.?",
     answer: "musun",
     options: ["musun", "müsün", "misin", "mısın"],
     fullCorrect: "Sen mutlu musun?"
+  },
+
+  // 📍 CASO (dativo / acusativo básico)
+  {
+    sentence: "Okul__ gidiyorum.",
+    answer: "a",
+    options: ["a", "e", "da", "den"],
+    fullCorrect: "Okula gidiyorum."
+  },
+  {
+    sentence: "Kitab__ okuyorum.",
+    answer: "ı",
+    options: ["ı", "i", "u", "ü"],
+    fullCorrect: "Kitabı okuyorum."
+  },
+
+  // 📍 LOCATIVO / ABLATIVO
+  {
+    sentence: "Ev__yim.",
+    answer: "de",
+    options: ["de", "da", "te", "ta"],
+    fullCorrect: "Evdeyim."
+  },
+  {
+    sentence: "Okul__ geliyorum.",
+    answer: "dan",
+    options: ["dan", "den", "tan", "ten"],
+    fullCorrect: "Okuldan geliyorum."
   }
 ];
 
@@ -104,6 +127,7 @@ function updateMuteUI() {
 // =====================
 function loadQuestion() {
   const q = quiz[currentIndex];
+
   if (!q) return;
 
   document.getElementById("questionBox").innerText = q.sentence;
@@ -122,13 +146,12 @@ function loadQuestion() {
 }
 
 // =====================
-// 🎯 CHECK ANSWER (VISUAL SYSTEM)
+// 🎯 CHECK ANSWER (INFINITO + VISUAL)
 // =====================
 function checkAnswer(selected, q) {
   const buttons = document.querySelectorAll("#options button");
 
   const correct = q.answer;
-
   const isCorrect = selected === correct;
 
   buttons.forEach(btn => {
@@ -136,12 +159,12 @@ function checkAnswer(selected, q) {
 
     const value = btn.innerText;
 
-    // correcta en verde
+    // 🟢 correcta
     if (value === correct) {
       btn.style.background = "#22c55e";
     }
 
-    // seleccion incorrecta en rojo
+    // 🔴 incorrecta seleccionada
     if (value === selected && !isCorrect) {
       btn.style.background = "#ef4444";
     }
@@ -149,7 +172,6 @@ function checkAnswer(selected, q) {
 
   if (isCorrect) score++;
 
-  // 🧠 frase correcta para audio
   const correctSentence =
     q.fullCorrect || q.sentence.replace("___", correct);
 
@@ -159,15 +181,14 @@ function checkAnswer(selected, q) {
   saveProgress();
 
   setTimeout(() => {
-    if (currentIndex < quiz.length) {
-      loadQuestion();
-    } else {
-      document.getElementById("feedback").innerText =
-        `🎉 Bitti! Score: ${score}/${quiz.length}`;
-
-      localStorage.removeItem("kelimer_lab");
+    // 🔁 INFINITO REAL
+    if (currentIndex >= quiz.length) {
+      quiz = shuffle([...baseQuiz]);
+      currentIndex = 0;
     }
-  }, 1200);
+
+    loadQuestion();
+  }, 900);
 }
 
 // =====================
