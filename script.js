@@ -1,5 +1,5 @@
 /**
- * TURKCE MASTER - MOTOR DE GENERACIÓN DINÁMICA
+ * TURKCE MASTER - VOCABULARIO EXPANDIDO
  */
 
 const TR = {
@@ -25,6 +25,8 @@ const TR = {
     applyKetcap: (w) => {
         if (w.toLowerCase() === "su") return "su";
         const last = w.slice(-1).toLowerCase();
+        // Evitar mutación en palabras muy cortas (opcional, pero recomendado)
+        if (w.length <= 2) return w; 
         return TR.mutations[last] ? w.slice(0, -1) + TR.mutations[last] : w;
     },
 
@@ -43,25 +45,36 @@ const game = {
     score: 0,
     curr: null,
 
-    // Diccionario extendido y clasificado
     nouns: {
         objects: [
-            { w: "elma", m: "la manzana" }, { w: "ekmek", m: "el pan" },
+            { w: "ekmek", m: "el pan" }, { w: "elma", m: "la manzana" },
             { w: "kitap", m: "el libro" }, { w: "kapı", m: "la puerta" },
             { w: "su", m: "el agua" }, { w: "gazete", m: "el periódico" },
-            { w: "bardak", m: "el vaso" }, { w: "anahtar", m: "la llave" }
+            { w: "bardak", m: "el vaso" }, { w: "anahtar", m: "la llave" },
+            { w: "çanta", m: "el bolso" }, { w: "çiçek", m: "la flor" },
+            { w: "bilgisayar", m: "el ordenador" }, { w: "defter", m: "el cuaderno" }
         ],
         places: [
-            { w: "okul", m: "la escuela" }, { w: "ev", m: "la casa" },
-            { w: "iş", m: "el trabajo" }, { w: "park", m: "el parque" },
-            { w: "sokak", m: "la calle" }, { w: "hastane", m: "el hospital" },
-            { w: "fırın", m: "la panadería" }, { w: "ofis", m: "la oficina" }
+            { w: "ev", m: "la casa" }, { w: "okul", m: "la escuela" },
+            { w: "park", m: "el parque" }, { w: "ofis", m: "la oficina" },
+            { w: "iş", m: "el trabajo" }, { w: "sokak", m: "la calle" },
+            { w: "market", m: "el mercado" }, { w: "hastane", m: "el hospital" },
+            { w: "eczane", m: "la farmacia" }, { w: "fırın", m: "la panadería" },
+            { w: "restoran", m: "el restaurante" }, { w: "bahçe", m: "el jardín" }
         ],
         people: [
-            { w: "doktor", m: "médico/a" }, { w: "öğretmen", m: "profesor/a" },
-            { w: "avukat", m: "abogado/a" }, { w: "öğrenci", m: "estudiante" },
-            { w: "mutlu", m: "feliz" }, { w: "yorgun", m: "cansado/a" },
-            { w: "çalışkan", m: "trabajador/a" }, { w: "hasta", m: "enfermo/a" }
+            { w: "doktor", m: "médico/a", vEsp: "ser" },
+            { w: "öğretmen", m: "profesor/a", vEsp: "ser" },
+            { w: "avukat", m: "abogado/a", vEsp: "ser" },
+            { w: "öğrenci", m: "estudiante", vEsp: "ser" },
+            { w: "mimar", m: "arquitecto/a", vEsp: "ser" },
+            { w: "mutlu", m: "feliz", vEsp: "estar" },
+            { w: "yorgun", m: "cansado/a", vEsp: "estar" },
+            { w: "hasta", m: "enfermo/a", vEsp: "estar" },
+            { w: "aç", m: "hambriento/a", vEsp: "estar" },
+            { w: "evli", m: "casado/a", vEsp: "ser" },
+            { w: "bekâr", m: "soltero/a", vEsp: "ser" },
+            { w: "çalışkan", m: "trabajador/a", vEsp: "ser" }
         ]
     },
 
@@ -69,22 +82,26 @@ const game = {
         { w: "ye", m: "comiendo", case: "acusativo", cat: "objects" },
         { w: "oku", m: "leyendo", case: "acusativo", cat: "objects" },
         { w: "aç", m: "abriendo", case: "acusativo", cat: "objects" },
+        { w: "al", m: "comprando", case: "acusativo", cat: "objects" },
+        { w: "kapat", m: "cerrando", case: "acusativo", cat: "objects" },
         { w: "git", m: "yendo", case: "dativo", cat: "places" },
         { w: "gel", m: "viniendo", case: "ablativo", cat: "places" },
-        { w: "otur", m: "sentado/a", case: "locativo", cat: "places" }
+        { w: "bak", m: "mirando", case: "dativo", cat: "places" },
+        { w: "otur", m: "viviendo", case: "locativo", cat: "places" }
     ],
 
     generate() {
-        const isNominal = Math.random() > 0.5;
+        const mode = Math.random() > 0.4 ? "nominal" : "verb";
         const p = ["ben", "sen", "o", "biz", "siz"][Math.floor(Math.random() * 5)];
 
-        if (isNominal) {
+        if (mode === "nominal") {
             const n = this.nouns.people[Math.floor(Math.random() * this.nouns.people.length)];
             const type = ["olumlu", "olumsuz", "soru"][Math.floor(Math.random() * 3)];
             return { noun: n, person: p, mode: "nominal", type: type };
         } else {
             const v = this.verbs[Math.floor(Math.random() * this.verbs.length)];
-            const n = this.nouns[v.cat][Math.floor(Math.random() * this.nouns[v.cat].length)];
+            const category = this.nouns[v.cat];
+            const n = category[Math.floor(Math.random() * category.length)];
             return { noun: n, verb: v, person: p, mode: "verb", case: v.case };
         }
     },
@@ -140,10 +157,9 @@ const game = {
                 opts = ["değilim", "değilsin", "değil", "değiliz", "değilsiniz"];
                 sentenceText = `${c.noun.w} <span class="gap">_______</span>.`;
             } else {
-                const h4q = TR.getH4(c.noun.w);
-                const m = "m" + h4q;
+                const m = "m" + h4;
                 const pSuf = { ben: "y?m", sen: "s?n", o: "", biz: "y?z", siz: "s?n?z" };
-                correct = m + (c.person === "o" ? "" : " " + pSuf[c.person].replace("?", h4q));
+                correct = m + (c.person === "o" ? "" : " " + pSuf[c.person].replace("?", h4));
                 opts = ["mıyım", "misin", "mi", "muyum", "mısınız", "miyiz", "mı"];
                 sentenceText = `${c.noun.w} <span class="gap">_______</span>?`;
             }
@@ -151,18 +167,14 @@ const game = {
 
         display.innerHTML = sentenceText;
 
-        // Limpiar opciones y asegurar que la correcta esté presente
-        let finalOptions = [...new Set(opts)].filter(o => o !== correct).sort(() => 0.5 - Math.random()).slice(0, 3);
-        finalOptions.push(correct);
-        finalOptions.sort(() => 0.5 - Math.random());
+        let pool = [...new Set(opts)].filter(o => o !== correct).sort(() => 0.5 - Math.random()).slice(0, 3);
+        pool.push(correct);
+        pool.sort(() => 0.5 - Math.random());
 
-        finalOptions.forEach(suf => {
+        pool.forEach(suf => {
             const btn = document.createElement("button");
             btn.className = "opt";
-            // Formateo visual de los botones
-            let label = suf === "" ? "(sin sufijo)" : (c.mode === "verb" || c.type === "olumlu" ? "-" + suf : suf);
-            btn.innerText = label;
-
+            btn.innerText = (suf === "" ? "(sin sufijo)" : (c.mode === "verb" || c.type === "olumlu" ? "-" + suf : suf));
             btn.onclick = () => {
                 if (suf === correct) {
                     this.score += 10;
@@ -170,11 +182,7 @@ const game = {
                     this.init();
                 } else {
                     btn.style.borderColor = "red";
-                    btn.style.color = "red";
-                    setTimeout(() => {
-                        btn.style.borderColor = "#eee";
-                        btn.style.color = "black";
-                    }, 400);
+                    setTimeout(() => btn.style.borderColor = "#eee", 400);
                 }
             };
             grid.appendChild(btn);
@@ -183,33 +191,27 @@ const game = {
 
     showHint(type) {
         const c = this.curr;
-        const pEsp = {
-            ben: { s: "Yo", v: "estoy", v2: "soy/estoy" },
-            sen: { s: "Tú", v: "estás", v2: "eres/estás" },
-            o: { s: "Él/Ella", v: "está", v2: "es/está" },
-            biz: { s: "Nosotros", v: "estamos", v2: "somos/estamos" },
-            siz: { s: "Vosotros", v: "estáis", v2: "sois/estáis" }
+        const prons = { ben: "Yo", sen: "Tú", o: "Él/Ella", biz: "Nosotros", siz: "Vosotros" };
+        const conj = {
+            ser: { ben: "soy", sen: "eres", o: "es", biz: "somos", siz: "sois" },
+            estar: { ben: "estoy", sen: "estás", o: "está", biz: "estamos", siz: "estáis" }
         };
 
         if (type === 't') {
             let msg = "";
-            const pr = pEsp[c.person];
             if (c.mode === "verb") {
-                msg = `${pr.s} ${pr.v} ${c.verb.m} ${c.noun.m}.`;
+                const vProns = { ben: "estoy", sen: "estás", o: "está", biz: "estamos", siz: "estáis" };
+                msg = `${prons[c.person]} ${vProns[c.person]} ${c.verb.m} ${c.noun.m}.`;
             } else {
-                if (c.type === "olumlu") msg = `${pr.s} ${pr.v2} ${c.noun.m}.`;
-                else if (c.type === "olumsuz") msg = `${pr.s} no ${pr.v2} ${c.noun.m}.`;
-                else msg = `¿${pr.s} ${pr.v2} ${c.noun.m}?`;
+                const v = conj[c.noun.vEsp][c.person];
+                if (c.type === "olumlu") msg = `${prons[c.person]} ${v} ${c.noun.m}.`;
+                else if (c.type === "olumsuz") msg = `${prons[c.person]} no ${v} ${c.noun.m}.`;
+                else msg = `¿${prons[c.person]} ${v} ${c.noun.m}?`;
             }
             document.getElementById("hint-display").innerText = msg;
         } else {
-            const ruleMap = {
-                acusativo: "Objeto Directo (El/La)",
-                dativo: "Dirección (A/Hacia)",
-                locativo: "Estar en (En)",
-                ablativo: "Origen (De/Desde)"
-            };
-            document.getElementById("rule-display").innerText = c.mode === "verb" ? `Regla: ${ruleMap[c.case]}` : "Regla: Oración Nominal / Adjetivos";
+            const rule = c.mode === "verb" ? `Caso ${c.case.toUpperCase()}` : `Estructura: ${c.type}`;
+            document.getElementById("rule-display").innerText = rule;
         }
     }
 };
