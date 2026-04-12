@@ -1,29 +1,24 @@
 :root {
-    /* --- PALETA OSCURA (Estilo Imagen) --- */
-    --bg-main: #141829;       /* Fondo oscuro */
-    --bg-card: #20263c;       /* Fondo tarjetas/botones */
-    --text-primary: #ffffff;  /* Texto blanco */
-    --text-secondary: #a0a8c0; /* Texto gris (traducción/stats) */
-    --accent: #4CAF50;        /* Verde acierto */
-    --wrong: #ff5252;         /* Rojo error */
-    --dot-inactive: #3d4663;  /* Puntos progreso inactivos */
+    --primary: #2c3e50;
+    --accent: #4CAF50;
+    --bg: #f8f9fa;
+    --text: #333;
 }
 
 body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-main);
+    background-color: var(--bg);
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: var(--text-primary);
 }
 
-/* --- ESTRUCTURA DE PORTADA (Header) --- */
+/* --- ESTRUCTURA DE PORTADA --- */
 .header-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Por defecto en columna para facilitar el diseño */
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -32,151 +27,127 @@ body {
 
 .main-title {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Apila Kelime Lab y Gramer */
     align-items: center;
     margin: 0 !important;
-    line-height: 1.1;
+    line-height: 1;
     font-weight: 800;
     text-align: center;
 }
 
-/* Título Kelime Lab - Rojo suavizado */
+/* Primera línea: Kelime Lab */
 .main-title span:first-child {
     font-size: 4rem;
-    background: linear-gradient(180deg, #ff8a80 10%, #c62828 90%) !important;
+    background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
 }
 
-/* Título Gramer - Más sutil */
+/* Segunda línea: Gramer */
 .main-title span:last-child {
     font-size: 3rem;
-    background: linear-gradient(180deg, #ff8a80 10%, #c62828 90%) !important;
+    opacity: 0.9;
+    background: linear-gradient(180deg, #ff4b2b 20%, #8b0000 90%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
-    opacity: 0.8;
 }
 
-/* Círculo 1.1A - Rojo elegante */
 .version-badge {
-    background: linear-gradient(180deg, #d32f2f 0%, #8e0000 100%) !important;
+    background: linear-gradient(180deg, #ff0000 0%, #990000 100%) !important;
     color: white !important;
     font-weight: 900;
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
     font-size: 1.8rem;
+    flex-shrink: 0;
     margin-top: 10px;
 }
 
-/* --- ESTILOS DEL JUEGO --- */
+/* --- AJUSTES PARA MÓVIL --- */
+@media (max-width: 600px) {
+    .main-title span:first-child {
+        font-size: 12vw !important; /* Ajuste fluido para Kelime Lab */
+    }
+
+    .main-title span:last-child {
+        font-size: 9vw !important; /* Ajuste fluido para Gramer */
+    }
+
+    .version-badge {
+        width: 65px !important;
+        height: 65px !important;
+        font-size: 1.4rem !important;
+        margin-top: 15px !important;
+    }
+
+    #word {
+        font-size: 1.8rem !important; /* Frases más pequeñas en móvil */
+    }
+}
+
+/* --- ESTILOS COMUNES DEL JUEGO --- */
 .screen-content { text-align: center; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+.primary-btn { display: block; width: 240px; font-size: 1.2rem; font-weight: bold; padding: 15px 0; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
+.primary-btn:active { transform: scale(0.95); }
 
-#game-container { 
-    width: 100%; 
-    max-width: 500px; 
-    display: none; 
-    flex-direction: column; 
-    padding: 20px; 
-}
+#game-container { width: 100%; max-width: 500px; display: none; flex-direction: column; padding: 20px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.stats { background: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-.topbar { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 20px; 
-    width: 100%;
-}
+.card { background: white; padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
 
-.stats { 
-    font-weight: 500; 
-    color: var(--text-secondary); 
-    font-size: 0.9rem;
-}
-
-/* --- TARJETA DE PREGUNTA --- */
-.card { 
-    background: var(--bg-card); 
-    padding: 40px 20px; 
-    border-radius: 24px; 
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
+/* Estilo para la frase en turco (Pregunta) */
 #word { 
-    font-size: 2.2rem; 
+    font-size: 1.8rem; 
+    color: var(--primary); 
     font-weight: 800; 
-    margin-bottom: 10px; 
+    margin-bottom: 5px; 
 }
 
-#translation { 
-    font-size: 1.1rem; 
-    color: var(--text-secondary); 
-    font-style: italic; 
+/* Ajuste automático para que en el móvil sea aún más pequeño */
+@media (max-width: 600px) {
+    #word {
+        font-size: 1.5rem !important;
+    }
 }
 
-/* --- OPCIONES --- */
-.options-grid { 
-    display: grid; 
-    gap: 8px; 
-    width: 100%; 
-}
+/* Estilo para la traducción (se crea por JS) */
+#translation { font-size: 1.1rem; color: #666; margin-bottom: 20px; font-weight: 500; font-style: italic; }
 
+.options-grid { display: grid; gap: 12px; }
 .option { 
-    background: var(--bg-card); 
-    padding: 10px 15px; 
+    background: white; 
+    padding: 18px; 
     border-radius: 15px; 
     font-size: 1.3rem; 
-    border: 1px solid rgba(255,255,255,0.05); 
+    border: 2px solid transparent; 
     cursor: pointer; 
     font-weight: 700; 
-    color: var(--text-primary); 
-    text-transform: lowercase;
-    width: 100%;
-    transition: transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    text-transform: lowercase; 
 }
 
-.option:active { transform: scale(0.98); }
-
-/* --- RESPUESTAS CORRECTA/ERROR --- */
-.correct { background-color: var(--accent) !important; border-color: var(--accent) !important; color: white !important; }
-.wrong { background-color: var(--wrong) !important; border-color: var(--wrong) !important; color: white !important; }
-
-/* --- PUNTOS Y BOTONES --- */
-#dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-.dot { width: 10px; height: 10px; background: var(--dot-inactive); border-radius: 50%; }
-.dot.active { background-color: var(--accent); }
-
-.primary-btn { 
-    background-color: #3949ab; 
-    color: white; 
-    border: none; 
-    padding: 15px 40px; 
-    border-radius: 50px; 
-    font-weight: bold; 
-    font-size: 1.2rem; 
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-/* --- ADAPTACIÓN MÓVIL --- */
+/* ESTO ES LO QUE HACER QUE EN EL MÓVIL SE VEAN GRANDES */
 @media (max-width: 600px) {
-    .main-title span:first-child { font-size: 12vw !important; }
-    .main-title span:last-child { font-size: 9vw !important; }
-    
-    #word { font-size: 1.8rem !important; }
-    
     .option {
-        font-size: 5.5vw !important; 
-        padding: 10px 10px !important; /* Altura más fina */
+        font-size: 5.5vw !important; /* La letra crecerá según el ancho del móvil */
+        padding: 22px 15px; /* Botones un poco más altos para tocar mejor */
     }
-    .options-grid { gap: 6px; }
+}
+
+.correct { 
+    background-color: var(--accent) !important; 
+    color: white !important; 
+}
+
+.wrong { 
+    background-color: #ff5252 !important; 
+    color: white !important; 
 }
