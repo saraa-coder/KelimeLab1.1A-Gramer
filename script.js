@@ -1,4 +1,4 @@
-// BASE DE DATOS
+// 1. BASE DE DATOS
 const allWords = [
 {word:"Bu sen ___?",correct:"misin",translation:"¿Eres tú?"},
 {word:"O öğrenci ___?",correct:"mi",translation:"¿Es estudiante?"},
@@ -17,64 +17,123 @@ const allWords = [
 {word:"Türkçe öğreniyor ___?",correct:"musun",translation:"¿Estás aprendiendo turco?"}
 ];
 
-// VARIABLES
-let pool=[],activeQueue=[],current=null,locked=false;
-let gameMode='tr-es',currentRoundMode='tr-es';
-const BLOCK_SIZE=10,MASTERY_THRESHOLD=3;
-let score=0,progress={};
+// 2. VARIABLES
+let pool = [];
+let activeQueue = [];
+let current = null;
+let lastWord = null;
+let locked = false;
+let gameMode = 'tr-es';
+let currentRoundMode = 'tr-es';
 
-// FUNCIONES
-function startGame(){
-document.getElementById('start-screen').style.display='none';
-document.getElementById('game-container').style.display='flex';
-activeQueue=[...allWords];
-loadQuestion();
+const BLOCK_SIZE = 10;
+const MASTERY_THRESHOLD = 3;
+
+let score = 0;
+let progress = {};
+
+// 3. INTERFAZ
+function showMenu() {
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('start-screen').style.display = '';
 }
 
-function loadQuestion(){
-locked=false;
-current=activeQueue[Math.floor(Math.random()*activeQueue.length)];
+function setMode(mode, e) {
+    gameMode = mode;
 
-const wordElement=document.getElementById("word");
-const optionsContainer=document.getElementById("options");
+    document.querySelectorAll('#mode-selector .primary-btn').forEach(btn => {
+        btn.style.opacity = "0.5";
+    });
 
-wordElement.innerHTML=`
-<div>${current.word}</div>
-<div class="translation">${current.translation}</div>
-`;
-
-let opts=new Set([current.correct]);
-while(opts.size<4){
-let r=allWords[Math.floor(Math.random()*allWords.length)].correct;
-opts.add(r);
+    if (e && e.currentTarget) {
+        e.currentTarget.style.opacity = "1";
+    }
 }
 
-optionsContainer.innerHTML="";
-[...opts].sort(()=>Math.random()-0.5).forEach(opt=>{
-let btn=document.createElement("button");
-btn.className="option";
-btn.textContent=opt;
-btn.onclick=()=>handleAnswer(opt,btn);
-optionsContainer.appendChild(btn);
-});
+function resetAndStart() {
+    score = 0;
+    progress = {};
+    startGame();
 }
 
-function handleAnswer(selected,btn){
-if(locked)return;
-locked=true;
-
-document.querySelectorAll(".option").forEach(b=>{
-if(b.textContent===current.correct)b.classList.add("correct");
-});
-
-if(selected!==current.correct){
-btn.classList.add("wrong");
+function startGame() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-container').style.display = 'flex';
+    initBlocks();
+    updateUI();
+    loadQuestion();
 }
 
-setTimeout(loadQuestion,700);
+// 4. LÓGICA
+function initBlocks() {
+    activeQueue = [...allWords];
 }
 
-function showMenu(){
-document.getElementById('game-container').style.display='none';
-document.getElementById('start-screen').style.display='';
+function updateUI() {
+    let total = allWords.length;
+    let percent = Math.round((score / total) * 100);
+
+    document.getElementById("score").textContent = score + " tamamlanan";
+    document.getElementById("percent").textContent = "%" + percent;
 }
+
+function loadQuestion() {
+    locked = false;
+
+    current = activeQueue[Math.floor(Math.random() * activeQueue.length)];
+
+    const wordElement = document.getElementById("word");
+    const optionsContainer = document.getElementById("options");
+
+    // 👇 TEXTO + TRADUCCIÓN
+    wordElement.innerHTML = `
+        <div>${current.word}</div>
+        <div class="translation">${current.translation}</div>
+    `;
+
+    let opts = new Set([current.correct]);
+
+    while (opts.size < 4) {
+        let randomItem = allWords[Math.floor(Math.random() * allWords.length)];
+        opts.add(randomItem.correct);
+    }
+
+    optionsContainer.innerHTML = "";
+
+    [...opts].sort(() => Math.random() - 0.5).forEach(opt => {
+        let btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => handleAnswer(opt, btn);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function handleAnswer(selected, btn) {
+    if (locked) return;
+    locked = true;
+
+    document.querySelectorAll(".option").forEach(b => {
+        if (b.textContent === current.correct) {
+            b.classList.add("correct");
+        }
+    });
+
+    if (selected === current.correct) {
+        score++;
+    } else {
+        btn.classList.add("wrong");
+    }
+
+    updateUI();
+
+    setTimeout(loadQuestion, 700);
+}
+
+// INICIO
+window.onload = () => {
+    const firstBtn = document.querySelector('#mode-selector button');
+    if (firstBtn) {
+        setMode('tr-es', { currentTarget: firstBtn });
+    }
+};
