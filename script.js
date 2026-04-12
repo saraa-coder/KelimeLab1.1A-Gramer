@@ -1,9 +1,10 @@
+
 // =====================
-// 🧠 STATE
+// 🧠 ESTADO GLOBAL
 // =====================
-let currentQuestion = null;
 let score = 0;
 let muted = false;
+let currentQuestion = null;
 let history = [];
 
 // =====================
@@ -11,9 +12,10 @@ let history = [];
 // =====================
 const places = ["ev", "okul", "banka", "park", "ofis", "market", "oda"];
 const objects = ["kitap", "telefon", "süt", "su", "kalem", "bilgisayar", "peynir"];
+const adjectives = ["güzel", "büyük", "küçük", "yeni"];
 
 // =====================
-// 🔁 UTILIDADES
+// 🔁 UTIL
 // =====================
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -30,11 +32,13 @@ function lastVowel(word) {
   return word.match(/[aeıioöuü]/gi)?.pop();
 }
 
+// =====================
+// 📌 SUFIJOS CASOS
+// =====================
 function getSuffix(type, word) {
   const v = lastVowel(word);
 
   const back = ["a", "ı", "o", "u"];
-  const front = ["e", "i", "ö", "ü"];
 
   const isBack = back.includes(v);
 
@@ -50,33 +54,21 @@ function getSuffix(type, word) {
 // 🧱 MUTACIÓN CONSONÁNTICA
 // =====================
 function consonantFix(word) {
+  const map = { p: "b", ç: "c", t: "d", k: "ğ" };
   const last = word[word.length - 1];
 
-  const map = {
-    "p": "b",
-    "ç": "c",
-    "t": "d",
-    "k": "ğ"
-  };
-
-  if (map[last]) {
-    return word.slice(0, -1) + map[last];
-  }
-
-  return word;
+  return map[last] ? word.slice(0, -1) + map[last] : word;
 }
 
 // =====================
-// 🧩 GENERADOR VAR / YOK
+// 🧩 VAR / YOK
 // =====================
 function genVarYok() {
   const place = random(places);
   const object = random(objects);
-
   const answer = Math.random() > 0.5 ? "var" : "yok";
 
   return {
-    type: "varYok",
     sentence: `${place} ${object} ___.`,
     answer,
     options: shuffle(["var", "yok", "evet", "tamam"]),
@@ -88,21 +80,20 @@ function genVarYok() {
 // ❓ SORU EKİ
 // =====================
 function genSoru() {
-  const adj = random(["güzel", "büyük", "küçük", "yeni"]);
+  const adj = random(adjectives);
 
-  const particle = (() => {
-    const v = lastVowel(adj);
-    if (["e", "i"].includes(v)) return "mi";
-    if (["a", "ı"].includes(v)) return "mı";
-    if (["o", "u"].includes(v)) return "mu";
-    return "mü";
-  })();
+  const v = lastVowel(adj);
+  let particle = "mi";
+
+  if (["a", "ı"].includes(v)) particle = "mı";
+  if (["o", "u"].includes(v)) particle = "mu";
+  if (["e", "i"].includes(v)) particle = "mi";
+  if (["ö", "ü"].includes(v)) particle = "mü";
 
   return {
-    type: "soru",
     sentence: `Bu ${adj} ___.?`,
     answer: particle,
-    options: shuffle(["mi", "mı", "mu", "mü"]),
+    options: ["mi", "mı", "mu", "mü"],
     full: `Bu ${adj} ${particle}?`
   };
 }
@@ -121,31 +112,16 @@ function genCase() {
 
   let sentence = "";
 
-  switch (type) {
-    case "dative":
-      sentence = `${place}__ gidiyorum.`;
-      break;
-    case "accusative":
-      sentence = `${object}__ görüyorum.`;
-      break;
-    case "locative":
-      sentence = `${place}__yim.`;
-      break;
-    case "ablative":
-      sentence = `${place}__ geliyorum.`;
-      break;
-  }
+  if (type === "dative") sentence = `${place}__ gidiyorum.`;
+  if (type === "accusative") sentence = `${object}__ görüyorum.`;
+  if (type === "locative") sentence = `${place}__yim.`;
+  if (type === "ablative") sentence = `${place}__ geliyorum.`;
 
   return {
-    type: "case",
     sentence,
     answer: suffix,
     options: shuffle(["a", "e", "ı", "i", "da", "de", "dan", "den"]),
-    full:
-      type === "dative" ? `${place}${suffix}` :
-      type === "accusative" ? `${object}${suffix}` :
-      type === "locative" ? `${place}${suffix}` :
-      `${place}${suffix}`
+    full: sentence.replace("__", suffix)
   };
 }
 
@@ -153,16 +129,15 @@ function genCase() {
 // 🎲 GENERADOR PRINCIPAL
 // =====================
 function generateQuestion() {
-  const types = ["varYok", "soru", "case"];
+  const types = ["var", "soru", "case"];
   const type = random(types);
 
   let q;
 
-  if (type === "varYok") q = genVarYok();
+  if (type === "var") q = genVarYok();
   if (type === "soru") q = genSoru();
   if (type === "case") q = genCase();
 
-  // anti repetición simple
   if (history.includes(q.sentence)) {
     return generateQuestion();
   }
@@ -240,8 +215,49 @@ function speak(text) {
 }
 
 // =====================
-// 🟢 START
+// 🟢 PORTADA BOTONES
 // =====================
-window.onload = () => {
+
+// BAŞLA
+document.getElementById("startBtn").onclick = () => {
+  score = 0;
+  history = [];
+  showGame();
   loadQuestion();
 };
+
+// DEVAM ET
+document.getElementById("continueBtn").onclick = () => {
+  showGame();
+  loadQuestion();
+};
+
+// MENÜ
+document.getElementById("menuBtn").onclick = () => {
+  showHome();
+};
+
+// AUDIO
+document.getElementById("muteBtn").onclick =
+document.getElementById("muteBtnGame").onclick = () => {
+  muted = !muted;
+
+  document.getElementById("muteBtn").innerText =
+    muted ? "🔇 Audio OFF" : "🔊 Audio ON";
+
+  document.getElementById("muteBtnGame").innerText =
+    muted ? "🔇" : "🔊";
+};
+
+// =====================
+// 🖥️ SCREENS
+// =====================
+function showGame() {
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("game").classList.add("active");
+}
+
+function showHome() {
+  document.getElementById("game").classList.remove("active");
+  document.getElementById("home").classList.add("active");
+}
