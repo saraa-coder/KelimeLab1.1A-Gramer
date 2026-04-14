@@ -338,7 +338,7 @@ const allWords = [
     {word:"Sen hazır değil ___",correct:"sin",translation:"No estás listo"},
     {word:"Sen yorgun değil ___",correct:"sin",translation:"No estás cansado"},
     {word:"Sen öğretmen değil ___",correct:"sin",translation:"No eres profesor"},
-    {word:"Sen aquí değil ___",correct:"sin",translation:"No estás aquí"},
+    {word:"Sen burada değil ___",correct:"sin",translation:"No estás aquí"},
     {word:"Sen meşgul değil ___",correct:"sin",translation:"No estás ocupado"},
     {word:"O doktor ___",correct:"değil",translation:"No es médico"},
     {word:"O öğrenci ___",correct:"değil",translation:"No es estudiante"},
