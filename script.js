@@ -525,7 +525,7 @@ function startGame() {
 
 function initBlocks() {
     // CORRECCIÓN: Si no hay progreso, usamos todas las palabras.
-    let available = allWords.filter(item => progress[item.word] !== undefined);
+    let available = [...allWords];
     
     if (available.length === 0) {
         available = [...allWords];
