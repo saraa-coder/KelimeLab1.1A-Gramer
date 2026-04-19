@@ -500,7 +500,7 @@ const allWords = [
     {word:"Onlar zengin değil ___?",correct:"mi",translation:"¿No son ricos?"}
 ];
 
-    let pool = []; 
+let pool = []; 
 let activeQueue = []; 
 let current = null;
 let locked = false;
