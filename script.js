@@ -508,26 +508,6 @@ let locked = false;
 let score = parseInt(localStorage.getItem('turco_score')) || 0;
 let progress = JSON.parse(localStorage.getItem('turco_progress')) || {};
 
-// --- FUNCIÓN DE VOZ ---
-function speakTurkish(phrase, completion) {
-    // Reemplazamos los guiones por la respuesta correcta para la lectura
-    let textToSpeak = phrase.replace("___", completion);
-    
-    // Cancelamos cualquier audio previo para evitar solapamientos
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = 'tr-TR'; // Idioma Turco
-    utterance.rate = 0.85;    // Velocidad un poco más lenta para claridad
-    
-    // Intentamos asignar una voz turca específica si el sistema la tiene
-    const voices = window.speechSynthesis.getVoices();
-    const trVoice = voices.find(v => v.lang.includes('tr'));
-    if (trVoice) utterance.voice = trVoice;
-
-    window.speechSynthesis.speak(utterance);
-}
-
 function resetAndStart() {
     localStorage.clear();
     score = 0;
@@ -537,13 +517,14 @@ function resetAndStart() {
 
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
+    document.getElementById('game-container').style.display = 'block'; // Cambiado a block para evitar errores de layout
     initBlocks();
     updateUI();
     loadQuestion();
 }
 
 function initBlocks() {
+    // CORRECCIÓN: Si no hay progreso, usamos todas las palabras.
     let available = allWords.filter(item => progress[item.word] !== undefined);
     
     if (available.length === 0) {
@@ -573,12 +554,16 @@ function loadQuestion() {
     const wordElement = document.getElementById("word");
     const optionsContainer = document.getElementById("options");
     
+    // Mostramos la frase en turco
     wordElement.textContent = current.word;
     
+    // --- AQUÍ AÑADIMOS LA TRADUCCIÓN ---
+    // Creamos un elemento pequeño para la traducción si no existe, o lo actualizamos
     let transElement = document.getElementById("translation");
     if (!transElement) {
         transElement = document.createElement("div");
         transElement.id = "translation";
+        // Estilo directamente aquí para que sea más pequeña y grisácea
         transElement.style.fontSize = "1.2rem"; 
         transElement.style.color = "#666";
         transElement.style.marginTop = "10px";
@@ -586,9 +571,11 @@ function loadQuestion() {
         wordElement.parentNode.insertBefore(transElement, document.getElementById("dots"));
     }
     transElement.textContent = current.translation;
+    // -----------------------------------
 
     optionsContainer.innerHTML = "";
 
+    // Generar opciones
     let opts = new Set([current.correct]);
     while(opts.size < 4) {
         let randomWord = allWords[Math.floor(Math.random() * allWords.length)];
@@ -605,7 +592,6 @@ function loadQuestion() {
         optionsContainer.appendChild(btn);
     });
 }
-
 function handleAnswer(opt, btn) {
     if (locked) return;
     locked = true;
@@ -613,14 +599,9 @@ function handleAnswer(opt, btn) {
     const correct = current.correct;
     const word = current.word;
 
-    // Resaltar la respuesta correcta siempre
     document.querySelectorAll(".option").forEach(b => {
         if (b.textContent === correct) b.classList.add("correct");
     });
-
-    // --- ACTIVAR VOZ ---
-    // Habla siempre con la frase completa y correcta
-    speakTurkish(word, correct);
 
     if (opt === correct) {
         score++;
@@ -634,19 +615,16 @@ function handleAnswer(opt, btn) {
     
     updateUI();
 
-    // Pausa un poco más larga (1.6s) para que dé tiempo a escuchar el audio
     setTimeout(() => {
         loadQuestion();
-    }, 1600);
+    }, 800);
 }
 
+// Para que el botón "Devam Et" funcione al recargar
 window.onload = () => {
     const resumeBtn = document.getElementById('resume-button');
     const savedProgress = JSON.parse(localStorage.getItem('turco_progress')) || {};
     if (Object.keys(savedProgress).length > 0 && resumeBtn) {
         resumeBtn.style.display = 'block'; 
     }
-    
-    // Esto ayuda a que las voces se carguen en algunos navegadores
-    window.speechSynthesis.getVoices();
 }
