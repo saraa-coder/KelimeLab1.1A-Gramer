@@ -72,7 +72,7 @@ const allWords = [
     {word:"Patron toplantıda ___?",correct:"mı",translation:"¿Está el jefe en reunión?"},
     {word:"Arkadaşın meşgul ___?",correct:"mü",translation:"¿Tu amigo está ocupado?"},
     {word:"Ailen burada ___?",correct:"mı",translation:"¿Tu familia está aquí?"},
-    {word:"Siz ahora serbest ___?",correct:"misiniz",translation:"¿Están ustedes libres ahora?"},
+    {word:"Siz şimdi serbest ___?",correct:"misiniz",translation:"¿Están ustedes libres ahora?"},
     {word:"Hava yağmurlu ___?",correct:"mu",translation:"¿Está lluvioso?"},
     {word:"Yol kapalı ___?",correct:"mı",translation:"¿Está la carretera cerrada?"},
     {word:"Mağaza açık ___?",correct:"mı",translation:"¿La tienda está abierta?"},
