@@ -81,7 +81,7 @@ const allWords = [
     {word:"Telefon çalışıyor ___?",correct:"mu",translation:"¿El teléfono funciona?"},
     {word:"Arabada benzin var ___?",correct:"mı",translation:"¿Hay gasolina en el coche?"},
     {word:"Para lazım ___?",correct:"mı",translation:"¿Hace falta dinero?"},
-    {word:"Bu importante ___?",correct:"mi",translation:"¿Es importante?"},
+    {word:"Bu önemli ___?",correct:"mi",translation:"¿Es importante?"},
     {word:"Sorun çözüldü ___?",correct:"mü",translation:"¿Se resolvió el problema?"},
     {word:"Bu kim? Öğretmen ___?",correct:"mi",translation:"¿Quién es este? ¿Es profesor?"},
     {word:"O doktor ___?",correct:"mu",translation:"¿Es médico/a?"},
