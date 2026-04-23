@@ -202,7 +202,7 @@ const allWords = [
     {word:"Bugün iş ___?",correct:"Var mı",translation:"¿Hay trabajo hoy?"},
     {word:"Yarın tatil ___?",correct:"Yok mu",translation:"¿No hay vacaciones mañana?"},
     {word:"Bu odada pencere ___?",correct:"Var mı",translation:"¿Hay ventana en esta habitación?"},
-    {word:"Kapı açık ___?",correct:"Var mı",translation:"¿Está la puerta abierta?"},
+    {word:"Kapı açık ___?",correct:"mı",translation:"¿Está la puerta abierta?"},
     {word:"Kapı kapalı ___?",correct:"Var mı",translation:"¿Está la puerta cerrada?"},
     {word:"Cüzdanda para ___?",correct:"Var mı",translation:"¿Hay dinero en la cartera?"},
     {word:"Cüzdanda kart ___?",correct:"Var mı",translation:"¿Hay tarjeta en la cartera?"},
